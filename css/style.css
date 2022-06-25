@@ -4,7 +4,7 @@ body{
 }
 .container{
   user-select: none;
-  margin: 40px auto;
+  margin: 100px auto;
   background: #231e39;
   color: #b3b8cd;
   border-radius: 5px;
