@@ -1,0 +1,106 @@
+port: 7880
+socks-port: 7881
+allow-lan: true
+mode: rule
+log-level: silent
+ipv6: false
+external-controller: 9080
+external-ui: folder
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  default-nameserver:
+    - 94.140.14.14 
+    - 94.140.15.15 
+  nameserver:
+    - 94.140.14.14 
+    - 94.140.15.15 
+    - 185.228.168.168
+    - 185.228.169.168
+    - quic://dns.adguard-dns.com:784 
+    - tls://dns.adguard-dns.com:853 
+    - https://dns.adguard-dns.com/dns-query 
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+proxies:
+
+  - name: "BDIX 50MBPS (Server 1)"
+    type: socks5
+    server: 116.193.221.249
+    port: 1088  
+    username: Zaman
+    password: Zaman
+    #udp: true
+    #tls: true
+    #skip-cert-verify: true
+
+  - name: "BDIX 50MBPS (Server 2)"
+    type: socks5
+    server: 116.193.222.85
+    port: 1088  
+    username: Zaman
+    password: Zaman
+    #udp: true
+    #tls: true
+    #skip-cert-verify: true
+
+proxy-groups:
+  - name: "KZT BDIX 50MBPS"
+    type: select
+    proxies:
+      - "LOAD BALANCE"
+      - "Best Ping Server"
+
+  - name: MANUAL SELECT
+    type: select
+    proxies:
+      - "BDIX 50MBPS (Server 1)"
+      - "BDIX 50MBPS (Server 2)"
+
+  - name: Best Ping Server
+    type: url-test
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    proxies:
+      - "BDIX 50MBPS (Server 1)"
+      - "BDIX 50MBPS (Server 2)"
+
+  - name: "LOAD BALANCE"
+    type: load-balance
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    proxies:
+      - "BDIX 50MBPS (Server 1)"
+      - "BDIX 50MBPS (Server 2)"
+    strategy: round-robin
+
+rules:
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,::1/128,DIRECT,no-resolve
+  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
+  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+  - IP-CIDR6,fd00::/8,DIRECT,no-resolve
+  - DOMAIN-SUFFIX,ad.com,REJECT
+  - DOMAIN,analytics.google.com,REJECT
+  - DOMAIN,analyticsinsights-pa.googleapis.com,REJECT
+  - DOMAIN,analyticsreporting.googleapis.com,REJECT
+  - DOMAIN-SUFFIX,doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,googleadservices.com,REJECT
+  - DOMAIN-SUFFIX,googleadsserving.cn,REJECT
+  - DOMAIN-SUFFIX,googlesyndication.com,REJECT
+  - DOMAIN-SUFFIX,googletagmanager.com,REJECT
+  - DOMAIN-SUFFIX,googletagservices.com,REJECT
+  - DOMAIN-SUFFIX,google-analytics.com,REJECT
+  - DOMAIN-KEYWORD,adservice,REJECT
+  - DOMAIN-KEYWORD,analytics,REJECT
+  - DOMAIN-KEYWORD,analysis,REJECT
+  - SRC-IP-CIDR,192.168.1.201/32,DIRECT
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - GEOIP,IR,DIRECT
+  - MATCH,, KZT BDIX 50MBPS , dns-failed
