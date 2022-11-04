@@ -15,42 +15,46 @@ dns:
     - 94.140.15.15 
     - tls://dns.adguard-dns.com:853 
     - https://dns.adguard-dns.com/dns-query 
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
+  enhanced-mode: fake-ip 
+  fake-ip-range: 198.18.0.1/16 
 proxies:
-
   - name: "BDIX 50MBPS (Server 1)"
     type: socks5
     server: 116.193.221.249
-    port: 1088  
+    port: 1088 
     username: Zaman
     password: Zaman
-    #udp: true
+    udp: true
     #tls: true
     #skip-cert-verify: true
 
   - name: "BDIX 50MBPS (Server 2)"
     type: socks5
     server: 116.193.222.85
-    port: 1088  
+    port: 1088 
     username: Zaman
     password: Zaman
-    #udp: true
+    udp: true
     #tls: true
     #skip-cert-verify: true
+  - name: "ss singapore"
+    type: ss
+    server: sg03.proxysocks.xyz
+    port: 8388
+    cipher: chacha20-ietf-poly1305
+    password: "NDY4M"
 
 proxy-groups:
   - name: "KZT BDIX 50MBPS"
     type: select
     proxies:
+      - DIRECT
+      - REJECT
       - "LOAD BALANCE"
       - "Best Ping Server"
-
-  - name: MANUAL SELECT
-    type: select
-    proxies:
       - "BDIX 50MBPS (Server 1)"
       - "BDIX 50MBPS (Server 2)"
+      - "SUPER ENCRYPT"
 
   - name: Best Ping Server
     type: url-test
@@ -71,7 +75,25 @@ proxy-groups:
       - "BDIX 50MBPS (Server 2)"
     strategy: round-robin
 
+  - name: "SUPER ENCRYPT"
+    type: relay
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    proxies:
+      - "BDIX 50MBPS (Server 1)"
+      - "ss singapore"
+
+rule-providers:
+  adblocker:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
 rules:
+  - RULE-SET,adblocker,REJECT
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
@@ -95,7 +117,9 @@ rules:
   - DOMAIN-KEYWORD,adservice,REJECT
   - DOMAIN-KEYWORD,analytics,REJECT
   - DOMAIN-KEYWORD,analysis,REJECT
+  - DOMAIN-KEYWORD,googleads,REJECT
+  - DOMAIN-KEYWORD,youtube,DIRECT
+  - DOMAIN-KEYWORD,discoveryftp,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
-  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - GEOIP,IR,DIRECT
-  - MATCH,, KZT BDIX 50MBPS , dns-failed
+  #- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - MATCH,KZT BDIX 50MBPS 
