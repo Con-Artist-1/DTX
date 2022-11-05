@@ -109,6 +109,7 @@ rules:
   - DOMAIN-SUFFIX,googletagmanager.com,REJECT
   - DOMAIN-SUFFIX,googletagservices.com,REJECT
   - DOMAIN-SUFFIX,google-analytics.com,REJECT
+  - DOMAIN-SUFFIX,ggpht.com,REJECT
   - DOMAIN-KEYWORD,adservice,REJECT
   - DOMAIN-KEYWORD,analytics,REJECT
   - DOMAIN-KEYWORD,analysis,REJECT
@@ -116,6 +117,7 @@ rules:
   - DOMAIN-KEYWORD,facebook,DIRECT
   - DOMAIN-KEYWORD,fbcdn,DIRECT
   - DOMAIN-KEYWORD,youtube,DIRECT
+  - DOMAIN-KEYWORD,googlevideo,DIRECT
   - DOMAIN-KEYWORD,discoveryftp,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
