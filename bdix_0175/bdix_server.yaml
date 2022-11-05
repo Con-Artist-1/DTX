@@ -122,4 +122,4 @@ rules:
   - DOMAIN-KEYWORD,discoveryftp,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
   #- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - MATCH,KZT BDIX 50MBPS 
+  - MATCH,auto 
