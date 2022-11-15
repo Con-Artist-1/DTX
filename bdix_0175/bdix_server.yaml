@@ -37,10 +37,10 @@ proxies:
     #skip-cert-verify: true
   - name: "ss singapore"
     type: ss
-    server: sg5-ss.sshstores.net
+    server: sg-ss.sshmax.xyz
     port: 8388
     cipher: chacha20-ietf-poly1305
-    password: "Lkuwo"
+    password: "NDYwOTk1"
 
 proxy-groups:
   - name: "KZT BDIX 50MBPS"
