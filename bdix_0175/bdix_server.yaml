@@ -109,9 +109,12 @@ rules:
   - DOMAIN-SUFFIX,googletagmanager.com,REJECT
   - DOMAIN-SUFFIX,googletagservices.com,REJECT
   - DOMAIN-SUFFIX,google-analytics.com,REJECT
+  - DOMAIN,tracker.torrent.eu.org,DIRECT
+  - DOMAIN,tracker.opentrackr.org,DIRECT
+  - DOMAIN,open.stealth.si,DIRECT
+  - DOMAIN,exodus.desync.com,DIRECT
   - DOMAIN-SUFFIX,ggpht.com,DIRECT
-  - DOMAIN-KEYWORD,nyaa,DIRECT
-  - DOMAIN-KEYWORD,opentrackr,DIRECT
+  - DOMAIN,nyaa.tracker.wf,DIRECT
   - DOMAIN-KEYWORD,adservice,REJECT
   - DOMAIN-KEYWORD,analytics,REJECT
   - DOMAIN-KEYWORD,analysis,REJECT
