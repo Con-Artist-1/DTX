@@ -35,12 +35,13 @@ proxies:
     #udp: true
     #tls: true
     #skip-cert-verify: true
+
   - name: "ss singapore"
     type: ss
-    server: sg-ss.sshmax.xyz
+    server: sg1socks.ipservers.xyz
     port: 8388
-    cipher: chacha20-ietf-poly1305
-    password: "NDYwOTk1"
+    cipher: aes-256-cfb
+    password: "aaUwOzj48U"
 
 proxy-groups:
   - name: "KZT BDIX 50MBPS"
