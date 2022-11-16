@@ -110,6 +110,7 @@ rules:
   - DOMAIN-SUFFIX,googletagservices.com,REJECT
   - DOMAIN-SUFFIX,google-analytics.com,REJECT
   - DOMAIN-SUFFIX,ggpht.com,DIRECT
+  - DOMAIN-KEYWORD,announce,DIRECT
   - DOMAIN-KEYWORD,adservice,REJECT
   - DOMAIN-KEYWORD,analytics,REJECT
   - DOMAIN-KEYWORD,analysis,REJECT
