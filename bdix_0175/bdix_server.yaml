@@ -41,7 +41,7 @@ proxies:
     server: sg2ss.greenssh.xyz
     port: 8388
     cipher: chacha20-ietf-poly1305
-    password: "ZDI0N"
+    password: "ZmUwO"
 
 proxy-groups:
   - name: "KZT BDIX 50MBPS"
