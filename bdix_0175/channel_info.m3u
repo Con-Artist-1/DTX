@@ -1,0 +1,37 @@
+#EXTM3U
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 1
+http://30.30.30.38:8080/live/skyfeed1005/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 2
+http://30.30.30.30:8080/live/skyfeed2001/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 3
+http://30.30.30.30:8080/live/skyfeed1006/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 4
+http://30.30.30.38:8080/live/skyfeed1007/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 5
+http://30.30.30.38:8080/live/skyfeed1008/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 6
+http://30.30.30.38:8080/live/skyfeed1009/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 7
+http://30.30.30.38:8080/live/skyfeed1010/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 8
+http://30.30.30.38:8080/live/skyfeed1011/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 9
+http://30.30.30.38:8080/live/skyfeed1012/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 10
+http://172.20.20.28/live/speedfeed1007/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 11
+http://30.30.30.38:8080/live/skyfeed2001/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 12
+http://30.30.30.38:8080/live/skyfeed2002/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 13
+http://30.30.30.38:8080/live/skyfeed2003/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 14
+http://30.30.30.38:8080/live/skyfeed2004/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 15
+http://30.30.30.38:8080/live/skyfeed2005/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 16
+http://30.30.30.38:8080/live/skyfeed2006/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 17
+http://30.30.30.38:8080/live/skyfeed2007/index.m3u8
+#EXTINF:-1 tvg-logo="http://30.30.30.30:8080/favicon.ico" group-title="",Channel 18
+http://30.30.30.38:8080/live/skyfeed2008/index.m3u8
