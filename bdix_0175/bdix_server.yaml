@@ -38,8 +38,8 @@ proxies:
 
   - name: "ss singapore"
     type: ss
-    server: sg-ss.sshmax.xyz
-    port: 8388
+    server: sg05.proxysocks.xyz
+    port: N2E0N
     cipher: chacha20-ietf-poly1305
     password: "NDYwOTk1"
 
