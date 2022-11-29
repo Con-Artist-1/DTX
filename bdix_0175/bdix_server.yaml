@@ -38,10 +38,10 @@ proxies:
 
   - name: "ss singapore"
     type: ss
-    server: sg2ss.greenssh.xyz
+    server: sg-ss.sshmax.xyz
     port: 8388
     cipher: chacha20-ietf-poly1305
-    password: "ZmUwO"
+    password: "NDYwOTk1"
 
 proxy-groups:
   - name: "KZT BDIX 50MBPS"
