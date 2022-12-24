@@ -1,6 +1,6 @@
 port: 4540
 allow-lan: false
-mode: rule
+mode: global
 log-level: silent
 ipv6: true
 dns:
