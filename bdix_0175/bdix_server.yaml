@@ -53,7 +53,6 @@ proxy-groups:
       - "BDIX 50MBPS (Server 1)"
       - "BDIX 50MBPS (Server 2)"
       - "SUPER ENCRYPT 1"
-      - "SUPER ENCRYPT 2"
 
   - name: Best Ping Server
     type: url-test
