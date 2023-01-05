@@ -69,6 +69,7 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
+      - DIRECT
       - "BDIX 50MBPS (Server 1)"
       - "BDIX 50MBPS (Server 2)"
     strategy: round-robin
