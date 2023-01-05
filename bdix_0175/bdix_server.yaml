@@ -79,7 +79,7 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
-      - "LOAD BALANCE"
+      -  "BDIX 50MBPS (Server 2)"
       - "ss singapore"
 
 
