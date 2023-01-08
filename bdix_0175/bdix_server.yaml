@@ -2,7 +2,7 @@ port: 4540
 allow-lan: false
 mode: rule
 log-level: silent
-ipv6: true
+ipv6: false
 dns:
   enable: true
   listen: 0.0.0.0:53
@@ -37,10 +37,10 @@ proxies:
 
   - name: "ss singapore"
     type: ss
-    server: sg01.proxysocks.xyz
+    server: sg2ss.greenssh.xyz
     port: 8388
     cipher: chacha20-ietf-poly1305
-    password: "YmE2N"
+    password: "YTRhN"
 
 proxy-groups:
   - name: "KZT BDIX 50MBPS"
