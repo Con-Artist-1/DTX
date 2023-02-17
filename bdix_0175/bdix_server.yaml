@@ -29,8 +29,8 @@ proxies:
     type: socks5
     server: 116.193.222.85
     port: 1088 
-    username: Zaman
-    password: Zaman
+    username: Zaman123
+    password: Zaman123
     #udp: true
     #tls: true
     #skip-cert-verify: true
