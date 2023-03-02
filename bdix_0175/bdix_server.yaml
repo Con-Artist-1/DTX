@@ -41,8 +41,7 @@ proxies:
     port: 8388
     cipher: chacha20-ietf-poly1305
     password: "YTRhN"
-  - {"type":"ss","name":"CA2","server":"51.161.118.38","port":812,"cipher":"chacha20-ietf-poly1305","password":"G!yBwPWH3Vao"}
-
+  - {"name":"CA2","type":"ss","server":"134.195.196.85","port":443,"password":"pKEW8JPByTVTLtM","cipher":"aes-256-gcm"}
 proxy-groups:
   - name: "KZT BDIX 50MBPS"
     type: select
@@ -81,7 +80,7 @@ proxy-groups:
     tolerance: 50
     proxies:
       -  "BDIX 50MBPS (Server 2)"
-      - "CA2"
+      -  "CA2"
 
 
 
