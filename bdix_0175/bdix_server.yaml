@@ -16,6 +16,21 @@ dns:
   enhanced-mode: fake-ip 
   fake-ip-range: 198.18.0.1/16 
 proxies:
+  - name: HoiChoiServer
+    type: vmess
+    server: bd1.vpnjantit.com
+    port: 10001
+    uuid: 18fa5caa-d085-11ed-b597-525401f40bae
+    sni: hoichoihlsns.akamaized.net
+    alterId: 0
+    cipher: auto
+    tls: 1
+    skip-cert-verify: true
+    udp: true
+    allowInsecure: 1
+    network: ws
+    ws-opts: 
+      path: /vpnjantit
   - name: "BDIX 50MBPS (Server 1)"
     type: socks5
     server: 116.193.221.249
@@ -48,6 +63,7 @@ proxy-groups:
     proxies:
       - DIRECT
       - REJECT
+      - "HoiChoiServer"
       - "LOAD BALANCE"
       - "Best Ping Server"
       - "BDIX 50MBPS (Server 1)"
