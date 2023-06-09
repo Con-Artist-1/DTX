@@ -27,7 +27,7 @@ proxies:
     #skip-cert-verify: true
   - {"name":"CA2","type":"ss","server":"134.195.196.85","port":443,"password":"pKEW8JPByTVTLtM","cipher":"aes-256-gcm","udp":true}
 proxy-groups:
-  - name: "KZ BDIX BYPASS"
+  - name: "KZT BDIX BYPASS"
     type: select
     proxies:
       - DIRECT
@@ -101,4 +101,4 @@ rules:
   - DOMAIN-KEYWORD,discoveryftp,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - MATCH,KZT BDIX 50MBPS
+  - MATCH,KZT BDIX BYPASS
