@@ -16,46 +16,15 @@ dns:
   enhanced-mode: fake-ip 
   fake-ip-range: 198.18.0.1/16 
 proxies:
-  - name: HoiChoiServer
-    type: vmess
-    server: bd1.vpnjantit.com
-    port: 10001
-    uuid: 18fa5caa-d085-11ed-b597-525401f40bae
-    sni: hoichoihlsns.akamaized.net
-    alterId: 0
-    cipher: auto
-    tls: 1
-    skip-cert-verify: true
-    udp: true
-    allowInsecure: 1
-    network: ws
-    ws-opts: 
-      path: /vpnjantit
-  - name: "BDIX 50MBPS (Server 1)"
-    type: socks5
-    server: 116.193.221.249
-    port: 1088 
-    username: Zaman
-    password: Zaman
-    #udp: true
-    #tls: true
-    #skip-cert-verify: true
-  - name: "BDIX 50MBPS (Server 2)"
-    type: socks5
-    server: 116.193.222.85
-    port: 1088 
-    username: Zaman123
-    password: Zaman123
-    #udp: true
-    #tls: true
-    #skip-cert-verify: true
-
-  - name: "ss singapore"
+  - name: "SS BDIX 100GB"
     type: ss
-    server: sg2ss.greenssh.xyz
-    port: 8388
-    cipher: chacha20-ietf-poly1305
-    password: "YTRhN"
+    server: node2.bdcloudbdix.xyz
+    port: 443
+    cipher: aes-256-gcm
+    password: 2a079e1b-bbef-4ce4-af49-cb8396dbc707
+    udp: true
+    #tls: true
+    #skip-cert-verify: true
   - {"name":"CA2","type":"ss","server":"134.195.196.85","port":443,"password":"pKEW8JPByTVTLtM","cipher":"aes-256-gcm","udp":true}
 proxy-groups:
   - name: "KZT BDIX 50MBPS"
@@ -63,21 +32,9 @@ proxy-groups:
     proxies:
       - DIRECT
       - REJECT
-      - "HoiChoiServer"
       - "LOAD BALANCE"
-      - "Best Ping Server"
-      - "BDIX 50MBPS (Server 1)"
-      - "BDIX 50MBPS (Server 2)"
+      - "SS BDIX 100GB"
       - "SUPER ENCRYPT 1"
-
-  - name: Best Ping Server
-    type: url-test
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    proxies:
-      - "BDIX 50MBPS (Server 1)"
-      - "BDIX 50MBPS (Server 2)"
 
   - name: "LOAD BALANCE"
     type: load-balance
@@ -86,7 +43,7 @@ proxy-groups:
     tolerance: 50
     proxies:
       - DIRECT
-      - "BDIX 50MBPS (Server 2)"
+      - "SS BDIX 100GB"
     strategy: round-robin
 
   - name: "SUPER ENCRYPT 1"
@@ -95,7 +52,7 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
-      -  "BDIX 50MBPS (Server 2)"
+      -  "SS BDIX 100GB"
       -  "CA2"
 
 
