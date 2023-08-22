@@ -19,9 +19,9 @@ proxies:
   - name: "SS BDIX 100GB"
     type: ss
     server: node2.bdcloudbdix.xyz
-    port: 443
+    port: 8443
     cipher: aes-256-gcm
-    password: 2a079e1b-bbef-4ce4-af49-cb8396dbc707
+    password: 8d606567-6756-4a3e-918c-1b46ea92bd64
     udp: true
     #tls: true
     #skip-cert-verify: true
