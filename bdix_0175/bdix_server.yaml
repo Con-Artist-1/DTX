@@ -31,7 +31,7 @@ proxies:
     # interface-name: eth0
     # routing-mark: 1234
     server: free.bdixbypass.com
-    port: 696
+    port: 6969
     username: @BDiX_BypassX
     password: @BDiX_BypassX
     # tls: true
