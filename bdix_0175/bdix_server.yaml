@@ -27,16 +27,16 @@ proxies:
     #skip-cert-verify: true
   - {"name":"CA2","type":"ss","server":"134.195.196.85","port":443,"password":"pKEW8JPByTVTLtM","cipher":"aes-256-gcm","udp":true}
   - name: "socks"
-  type: socks5
-  # interface-name: eth0
-  # routing-mark: 1234
-  server: free.bdixbypass.com
-  port: 696
-  username: @BDiX_BypassX
-  password: @BDiX_BypassX
-  # tls: true
-  # skip-cert-verify: true
-  # udp: true
+    type: socks5
+    # interface-name: eth0
+    # routing-mark: 1234
+    server: free.bdixbypass.com
+    port: 696
+    username: @BDiX_BypassX
+    password: @BDiX_BypassX
+    # tls: true
+    # skip-cert-verify: true
+    # udp: true
 proxy-groups:
   - name: "KZT BDIX BYPASS"
     type: select
