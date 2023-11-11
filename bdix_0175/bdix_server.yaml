@@ -31,7 +31,6 @@ proxies:
     username: Lb101
     password: ba6m9h
     udp: true
-    tls: true
     
 proxy-groups:
   - name: "KZT BDIX BYPASS"
