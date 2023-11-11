@@ -26,17 +26,11 @@ proxies:
     #tls: true
     #skip-cert-verify: true
   - {"name":"CA2","type":"ss","server":"134.195.196.85","port":443,"password":"pKEW8JPByTVTLtM","cipher":"aes-256-gcm","udp":true}
-  - name: "socks"
+  - name: "BDIX100"
     type: socks5
-    # interface-name: eth0
-    # routing-mark: 1234
-    server: free.bdixbypass.com
-    port: 6969
-    username: @BDiX_BypassX
-    password: @BDiX_BypassX
-    # tls: true
-    # skip-cert-verify: true
-    # udp: true
+    server: 45.127.247.12
+    port: 1088
+    cipher: aes-256-cfb  # You can choose a different cipher if needed
 proxy-groups:
   - name: "KZT BDIX BYPASS"
     type: select
@@ -46,7 +40,7 @@ proxy-groups:
       - "LOAD BALANCE"
       - "SS BDIX 100GB"
       - "SUPER ENCRYPT 1"
-      - "socks"
+      - "BDIX100"
 
   - name: "LOAD BALANCE"
     type: load-balance
