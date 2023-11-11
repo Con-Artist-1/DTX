@@ -59,7 +59,7 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
-      -  "SS BDIX 100GB"
+      -  "BDIX100"
       -  "FR78KZ"
 
 
