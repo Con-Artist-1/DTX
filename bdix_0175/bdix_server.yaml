@@ -26,10 +26,10 @@ proxies:
     
   - name: "BDIX100"
     type: socks5
-    server: 45.127.247.12
+    server: 118.179.151.185
     port: 1088
-    username: Lb101
-    password: ba6m9h
+    username: Lb106
+    password: bakjrz
     
 proxy-groups:
   - name: "KZT BDIX BYPASS"
