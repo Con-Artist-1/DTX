@@ -28,15 +28,8 @@ proxies:
     type: socks5
     server: 45.127.247.12
     port: 1088
-    username: Lb106
-    password: bakjrz
-    
-  - name: "BDIX100 2"
-    type: socks5
-    server: 118.179.151.185
-    port: 1088
-    username: Lb106
-    password: bakjrz
+    username: Lb101
+    password: ba6m9h
     
 proxy-groups:
   - name: "KZT BDIX BYPASS"
@@ -47,7 +40,6 @@ proxy-groups:
       - "LOAD BALANCE"
       - "SUPER ENCRYPT 1"
       - "BDIX100"
-      - "BDIX100 2"
 
   - name: "LOAD BALANCE"
     type: load-balance
