@@ -30,7 +30,14 @@ proxies:
     port: 1088
     username: Lb101
     password: ba6m9h
-    
+
+  - name: "KZTBDIX50"
+    type: socks5
+    server: 103.137.142.121
+    port: 1080
+    username: tanvir
+    password: tanvir
+  
 proxy-groups:
   - name: "KZT BDIX BYPASS"
     type: select
@@ -40,6 +47,7 @@ proxy-groups:
       - "LOAD BALANCE"
       - "SUPER ENCRYPT 1"
       - "BDIX100"
+      - "KZTBDIX50"
 
   - name: "LOAD BALANCE"
     type: load-balance
@@ -47,7 +55,7 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
-      - DIRECT
+      - "KZTBDIX50"
       - "BDIX100"
     strategy: round-robin
 
