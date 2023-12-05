@@ -46,6 +46,7 @@ proxy-groups:
       - REJECT
       - "LOAD BALANCE"
       - "SUPER ENCRYPT 1"
+      - "SUPER ENCRYPT 2 50BDIX"
       - "BDIX100"
       - "KZTBDIX50"
 
@@ -68,7 +69,14 @@ proxy-groups:
       -  "BDIX100"
       -  "FR78KZ"
 
-
+  - name: "SUPER ENCRYPT 2"
+    type: relay
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    proxies:
+      -  "KZTBDIX50"
+      -  "FR78KZ"
 
 script:
   shortcuts:
