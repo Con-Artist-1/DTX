@@ -34,7 +34,7 @@ proxies:
   - name: "KZTBDIX50"
     type: socks5
     server: 103.137.142.121
-    port: 1080
+    port: 6969
     username: tanvir
     password: tanvir
   
