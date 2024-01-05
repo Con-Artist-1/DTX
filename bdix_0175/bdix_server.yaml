@@ -18,9 +18,9 @@ dns:
 proxies:
   - name: "FR78KZ"
     type: ss
-    server: 57.128.141.14
+    server: 145.239.1.100
     port: 443
-    password: asdKkaskJKfnsa
+    password: pKEW8JPByTVTLtM
     cipher: aes-256-cfb
     udp: true
     
