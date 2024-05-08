@@ -24,20 +24,12 @@ proxies:
     cipher: aes-256-gcm
     udp: true
     
-  - name: "BDIX100"
+  - name: "BDIX20"
     type: socks5
-    server: 45.127.247.12
-    port: 1088
-    username: Lb101
-    password: ba6m9h
-
-  - name: "KZTBDIX50"
-    type: socks5
-    server: 103.137.142.121
+    server: 103.154.49.209
     port: 6969
-    username: tanvir
-    password: tanvir
-    udp: true
+    username: Tanvir
+    password: Tanvir
   
 proxy-groups:
   - name: "KZT BDIX BYPASS"
@@ -46,10 +38,8 @@ proxy-groups:
       - DIRECT
       - REJECT
       - "LOAD BALANCE"
-      - "SUPER ENCRYPT 1"
-      - "SUPER ENCRYPT 2 50BDIX"
-      - "BDIX100"
-      - "KZTBDIX50"
+      - "SUPER ENCRYPT"
+      - "BDIX20"
 
   - name: "LOAD BALANCE"
     type: load-balance
@@ -57,26 +47,16 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
-      - "KZTBDIX50"
-      - "BDIX100"
+      - "BDIX20"
     strategy: round-robin
 
-  - name: "SUPER ENCRYPT 1"
+  - name: "SUPER ENCRYPT"
     type: relay
     url: 'http://cp.cloudflare.com/'
     interval: 200
     tolerance: 50
     proxies:
-      -  "BDIX100"
-      -  "FR78KZ"
-
-  - name: "SUPER ENCRYPT 2 50BDIX"
-    type: relay
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    proxies:
-      -  "KZTBDIX50"
+      -  "BDIX20"
       -  "FR78KZ"
 
 script:
@@ -122,7 +102,6 @@ rules:
   - DOMAIN-KEYWORD,googlevideo,DIRECT
   - DOMAIN-KEYWORD,discoveryftp,DIRECT
   - DOMAIN-KEYWORD,whatsapp,DIRECT
-  - DOMAIN-KEYWORD,circleftp,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
   - MATCH,KZT BDIX BYPASS
