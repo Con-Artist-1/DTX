@@ -41,6 +41,7 @@ proxy-groups:
       - "LOAD BALANCE"
       - "SUPER ENCRYPT"
       - "BDIX20"
+      - "FR27KZ"
 
   - name: "LOAD BALANCE"
     type: load-balance
