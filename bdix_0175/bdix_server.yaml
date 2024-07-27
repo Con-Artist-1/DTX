@@ -26,10 +26,10 @@ proxies:
     
   - name: "BDIX20"
     type: socks5
-    server: 27.147.148.186
-    port: 9090
-    username: kamruzzana
-    password: kamruzzana
+    server: 182.160.121.90
+    port: 1052
+    username: R.Tanvir27/08
+    password: R.Tanvir27/08
   
 proxy-groups:
   - name: "KZT BDIX BYPASS"
