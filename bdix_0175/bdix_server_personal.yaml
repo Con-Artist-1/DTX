@@ -73,21 +73,21 @@ proxies:
 
   - name: "OracleWG"
     type: wireguard
-    private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
+    server: wg2.nbhost.eu.org
+    port: 51820
     ip: 10.8.0.10
+    private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
+    public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
     #dns: [94.140.14.14, 94.140.15.15, 2a10:50c0::ad1:ff, 2a10:50c0::ad2:ff]
+    remote-dns-resolve: true
     dns:
       - 94.140.14.14 
       - 94.140.15.15
-    public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
     preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
     allowed-ips: ['0.0.0.0/0', '::/0']
     #mtu: default
-    #remote-dns-resolve: true
     persistent-keepalive: 0
     udp: true
-    server: wg2.nbhost.eu.org
-    port: 51820
     
 proxy-groups:
   - name: "KZT BDIX BYPASS"
