@@ -37,7 +37,21 @@ proxies:
     port: 1052
     username: R.Tanvir27/08
     password: R.Tanvir27/08
-
+    
+  - name: "BDIX1" #own bdix server
+    type: socks5
+    server: 122.102.35.105 #proxy ip here
+    port: 1080 #port here
+    username: user1 #username here
+    password: user1 #password here
+  
+  - name: "BDIX2" #own bdix server
+    type: socks5
+    server: 103.111.226.248
+    port: 9090
+    username: MX
+    password: XM
+  
   - name: "WARP+"
     type: wireguard
     server: engage.cloudflareclient.com
@@ -73,12 +87,24 @@ proxy-groups:
       - REJECT
       - "WIREGUARDS"
       - "LOAD BALANCE"
-      - "SEFR27"
-      - "SEDE20"
+      - "RELAY SERVER"
+      - "BDIX SERVER"
+      
+  - name: "BDIX SERVER"
+    type: select
+    proxies:
       - "BDIX20"
+      - "BDIX1"
+      - "BDIX2"
+      
+  - name: "RELAY SERVER"
+    type: select
+    proxies:
       - "FR27KZ"
       - "DE20KZ"
-
+      - "SEFR27"
+      - "SEDE20"
+      
   - name: "WIREGUARDS"
     type: select
     proxies:
@@ -92,6 +118,8 @@ proxy-groups:
     tolerance: 50
     proxies:
       - "BDIX20"
+      - "BDIX1"
+      - "BDIX2"
     strategy: round-robin
 
   - name: "SEFR27"
@@ -100,7 +128,7 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
-      -  "BDIX20"
+      -  "BDIX SERVER"
       -  "FR27KZ"
 
   - name: "SEDE20"
@@ -109,7 +137,7 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
-      -  "BDIX20"
+      -  "BDIX SERVER"
       -  "DE20KZ"
 
 script:
