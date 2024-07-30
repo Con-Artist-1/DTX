@@ -1,0 +1,183 @@
+port: 4540
+allow-lan: false
+mode: rule
+log-level: silent
+ipv6: true
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  default-nameserver:
+    - 94.140.14.14 
+    - 94.140.15.15 
+  nameserver:
+    - 94.140.14.14 
+    - 94.140.15.15 
+    - https://dns.adguard-dns.com/dns-query
+  enhanced-mode: fake-ip 
+  fake-ip-range: 198.18.0.1/16 
+proxies:
+    
+  - name: "FR27 RAW"
+    type: ss
+    server: 145.239.6.202
+    port: 9101
+    password: e4FCWrgpkji3QY
+    cipher: aes-256-gcm
+
+  - name: "DE20 RAW"
+    type: ss
+    server: 23.158.56.196
+    port: 8882
+    password: kDWvXYZoTBcGkC4
+    cipher: aes-256-gcm
+    
+  - name: "BDIX1" #own bdix server
+    type: socks5
+    server: 122.102.35.105 #proxy ip here
+    port: 1080 #port here
+    username: user1 #username here
+    password: user1 #password here
+  
+  - name: "BDIX2" #own bdix server
+    type: socks5
+    server: 103.111.226.248
+    port: 9090
+    username: MX
+    password: XM
+
+  - name: "HTTP P1"
+    type: http
+    server: 103.40.226.165
+    port: 9879
+
+  
+  - name: "WARP+"
+    type: wireguard
+    server: engage.cloudflareclient.com
+    port: 2408
+    ip: 172.16.0.2
+    ipv6: 2606:4700:110:8a73:800d:2e64:204c:184f
+    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+    private-key: GCX6t2hSpaSzWcNzwTGQnqpuVPac+7BZlI7OsU/EtGQ=
+    udp: true
+    dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
+    mtu: 1280
+    allowed_ips: ['0.0.0.0/0', '::/0']
+
+  - name: "OracleWG"
+    type: wireguard
+    server: wg2.nbhost.eu.org
+    port: 51820
+    ip: 10.8.0.10
+    dns: [1.1.1.1, 8.8.8.8]
+    private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
+    public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
+    allowed-ips: ['0.0.0.0/0', '::/0']
+    preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
+    udp: true
+    mtu: 1280
+
+  
+proxy-groups:
+  - name: "KZT BDIX BYPASS"
+    type: select
+    proxies:
+      - DIRECT
+      - REJECT
+      - "LOAD BALANCE"
+      - "RELAY SERVER"
+      - "BDIX SERVER"
+      - "WARP+"
+      - "OracleWG"
+      
+  - name: "BDIX SERVER"
+    type: select
+    proxies:
+      - "BDIX1"
+      - "BDIX2"
+      - "HTTP P1"
+      
+  - name: "RELAY SERVER"
+    type: select
+    proxies:
+      - "FR27 RAW"
+      - "DE20 RAW"
+      - "FR27 Relay"
+      - "DE20 Relay"
+
+  - name: "LOAD BALANCE"
+    type: load-balance
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    proxies:
+      - "BDIX1"
+      - "BDIX2"
+      - "HTTP P1"
+    strategy: round-robin
+
+  - name: "FR27 Relay"
+    type: relay
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    proxies:
+      -  "BDIX SERVER"
+      -  "FR27 RAW"
+
+  - name: "DE20 Relay"
+    type: relay
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    proxies:
+      -  "BDIX SERVER"
+      -  "DE20 RAW"
+
+#script:
+#  shortcuts:
+#    NULLDNS: resolve_ip(host) == "0.0.0.0"
+
+rules:
+#  - SCRIPT,NULLDNS,REJECT 
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,::1/128,DIRECT,no-resolve
+  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
+  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+  - IP-CIDR6,fd00::/8,DIRECT,no-resolve
+  - DOMAIN-SUFFIX,ad.com,REJECT
+  - DOMAIN,analytics.google.com,REJECT
+  - DOMAIN,analyticsinsights-pa.googleapis.com,REJECT
+  - DOMAIN,analyticsreporting.googleapis.com,REJECT
+  - DOMAIN-SUFFIX,doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,googleadservices.com,REJECT
+  - DOMAIN-SUFFIX,googleadsserving.cn,REJECT
+  - DOMAIN-SUFFIX,googlesyndication.com,REJECT
+  - DOMAIN-SUFFIX,googletagmanager.com,REJECT
+  - DOMAIN-SUFFIX,googletagservices.com,REJECT
+  - DOMAIN-SUFFIX,google-analytics.com,REJECT
+  - DOMAIN,tracker.torrent.eu.org,DIRECT
+  - DOMAIN,tracker.opentrackr.org,DIRECT
+  - DOMAIN,open.stealth.si,DIRECT
+  - DOMAIN,exodus.desync.com,DIRECT
+  - DOMAIN-SUFFIX,ggpht.com,DIRECT
+  - DOMAIN,nyaa.tracker.wf,DIRECT
+  - DOMAIN-KEYWORD,adservice,REJECT
+  - DOMAIN-KEYWORD,analytics,REJECT
+  - DOMAIN-KEYWORD,analysis,REJECT
+  - DOMAIN-KEYWORD,googleads,REJECT
+  #- DOMAIN-KEYWORD,facebook,DIRECT
+  - DOMAIN-KEYWORD,torrentbd,DIRECT
+  #- DOMAIN-KEYWORD,fbcdn,DIRECT
+  - DOMAIN-KEYWORD,youtube,DIRECT
+  - DOMAIN-KEYWORD,googlevideo,DIRECT
+  - DOMAIN-KEYWORD,discoveryftp,DIRECT
+  #- DOMAIN-KEYWORD,whatsapp,DIRECT
+  - SRC-IP-CIDR,192.168.1.201/32,DIRECT
+  - IP-CIDR,103.209.41.178/16,DIRECT
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - MATCH,KZT BDIX BYPASS
