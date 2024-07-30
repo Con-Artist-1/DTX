@@ -67,7 +67,8 @@ proxies:
     public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
     private-key: GCX6t2hSpaSzWcNzwTGQnqpuVPac+7BZlI7OsU/EtGQ=
     udp: true
-    dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
+    #dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
+    remote-dns-resolve: true
     mtu: 1280
     allowed_ips: ['0.0.0.0/0', '::/0']
 
@@ -76,18 +77,13 @@ proxies:
     server: wg2.nbhost.eu.org
     port: 51820
     ip: 10.8.0.10
-    private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
     public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
+    private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
+    udp: true
     #dns: [94.140.14.14, 94.140.15.15, 2a10:50c0::ad1:ff, 2a10:50c0::ad2:ff]
     remote-dns-resolve: true
-    dns:
-      - 94.140.14.14 
-      - 94.140.15.15
     preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
     allowed-ips: ['0.0.0.0/0', '::/0']
-    #mtu: default
-    persistent-keepalive: 0
-    udp: true
     
 proxy-groups:
   - name: "KZT BDIX BYPASS"
