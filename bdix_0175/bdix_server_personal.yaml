@@ -80,7 +80,7 @@ proxies:
     private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
     public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
     allowed-ips: ['0.0.0.0/0', '::/0']
-    preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
+    preshared-key: base64
     udp: true
     mtu: 1280
 
