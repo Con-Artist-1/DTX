@@ -84,13 +84,13 @@ proxies:
     udp: true
     mtu: 1280
 
-  
 proxy-groups:
   - name: "KZT BDIX BYPASS"
     type: select
     proxies:
       - DIRECT
       - REJECT
+      - "AUTO (Best Ping)"
       - "LOAD BALANCE"
       - "RELAY SERVER"
       - "BDIX SERVER"
@@ -99,6 +99,9 @@ proxy-groups:
       
   - name: "BDIX SERVER"
     type: select
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
     proxies:
       - "BDIX20"
       - "BDIX1"
@@ -124,7 +127,17 @@ proxy-groups:
       - "BDIX2"
       - "HTTP P1"
     strategy: round-robin
-
+      
+  - name: "AUTO (Best Ping)"
+    type: url-test
+    url: http://cp.cloudflare.com/
+    interval: 300
+    tolerance: 50
+    proxies:
+      - "BDIX1"
+      - "BDIX2"
+      - "HTTP P1"
+      
   - name: "FR27 Relay"
     type: relay
     url: 'http://cp.cloudflare.com/'
