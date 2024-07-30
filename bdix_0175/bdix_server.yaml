@@ -140,12 +140,12 @@ proxy-groups:
       -  "BDIX SERVER"
       -  "DE20KZ"
 
-script:
-  shortcuts:
-    NULLDNS: resolve_ip(host) == "0.0.0.0"
+#script:
+#  shortcuts:
+#    NULLDNS: resolve_ip(host) == "0.0.0.0"
 
 rules:
-  - SCRIPT,NULLDNS,REJECT 
+#  - SCRIPT,NULLDNS,REJECT 
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
