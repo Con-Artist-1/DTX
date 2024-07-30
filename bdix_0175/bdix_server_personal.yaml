@@ -134,6 +134,7 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
+      - "BDIX20"
       - "BDIX1"
       - "BDIX2"
       - "HTTP P1"
