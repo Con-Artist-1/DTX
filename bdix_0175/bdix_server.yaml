@@ -76,7 +76,7 @@ proxies:
     allowed-ips: ['0.0.0.0/0', '::/0']
     preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
     udp: true
-    mtu: 1408
+    mtu: 1280
 
   
 proxy-groups:
@@ -85,10 +85,11 @@ proxy-groups:
     proxies:
       - DIRECT
       - REJECT
-      - "WIREGUARDS"
       - "LOAD BALANCE"
       - "RELAY SERVER"
       - "BDIX SERVER"
+      - "WARP+"
+      - "OracleWG"
       
   - name: "BDIX SERVER"
     type: select
@@ -104,12 +105,6 @@ proxy-groups:
       - "DE20KZ"
       - "SEFR27"
       - "SEDE20"
-      
-  - name: "WIREGUARDS"
-    type: select
-    proxies:
-      - "WARP+"
-      - "OracleWG"
 
   - name: "LOAD BALANCE"
     type: load-balance
