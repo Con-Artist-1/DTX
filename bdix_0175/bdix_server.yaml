@@ -81,17 +81,30 @@ proxies:
 proxy-groups:
   - name: "KAB BDIX BYPASS"
     type: select
+    url: 'http://cp.cloudflare.com/'
     proxies:
       - DIRECT
       - REJECT
+      - "AUTO (Best Ping)"
       - "LOAD BALANCE"
       - "RELAY SERVER"
       - "BDIX SERVER"
       - "WARP+"
       - "OracleWG"
       
+  - name: "AUTO (Best Ping)"
+    type: url-test
+    url: http://cp.cloudflare.com/
+    interval: 300
+    tolerance: 50
+    proxies:
+      - "BDIX1"
+      - "BDIX2"
+      - "HTTP P1"
+      
   - name: "BDIX SERVER"
     type: select
+    url: 'http://cp.cloudflare.com/'
     proxies:
       - "BDIX1"
       - "BDIX2"
@@ -99,6 +112,7 @@ proxy-groups:
       
   - name: "RELAY SERVER"
     type: select
+    url: 'http://cp.cloudflare.com/'
     proxies:
       - "FR27 RAW"
       - "DE20 RAW"
