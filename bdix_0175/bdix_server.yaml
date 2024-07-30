@@ -79,7 +79,7 @@ proxies:
 
   
 proxy-groups:
-  - name: "KZT BDIX BYPASS"
+  - name: "KAB BDIX BYPASS"
     type: select
     proxies:
       - DIRECT
