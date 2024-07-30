@@ -92,16 +92,6 @@ proxy-groups:
       - "WARP+"
       - "OracleWG"
       
-  - name: "AUTO (Best Ping)"
-    type: url-test
-    url: http://cp.cloudflare.com/
-    interval: 300
-    tolerance: 50
-    proxies:
-      - "BDIX1"
-      - "BDIX2"
-      - "HTTP P1"
-      
   - name: "BDIX SERVER"
     type: select
     url: 'http://cp.cloudflare.com/'
@@ -129,6 +119,16 @@ proxy-groups:
       - "BDIX2"
       - "HTTP P1"
     strategy: round-robin
+      
+  - name: "AUTO (Best Ping)"
+    type: url-test
+    url: http://cp.cloudflare.com/
+    interval: 300
+    tolerance: 50
+    proxies:
+      - "BDIX1"
+      - "BDIX2"
+      - "HTTP P1"
 
   - name: "FR27 Relay"
     type: relay
@@ -147,6 +147,7 @@ proxy-groups:
     proxies:
       -  "BDIX SERVER"
       -  "DE20 RAW"
+  
 
 #script:
 #  shortcuts:
