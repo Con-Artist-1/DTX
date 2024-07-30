@@ -50,6 +50,20 @@ proxies:
     dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
     mtu: 1280
     allowed_ips: ['0.0.0.0/0', '::/0']
+
+  - name: "OracleWG"
+    type: wireguard
+    server: wg2.nbhost.eu.org
+    port: 51820
+    ip: 10.8.0.10
+    dns: [1.1.1.1, 8.8.8.8]
+    private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
+    public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
+    allowed-ips: ['0.0.0.0/0', '::/0']
+    preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
+    udp: true
+    mtu: 1408
+
   
 proxy-groups:
   - name: "KZT BDIX BYPASS"
@@ -57,13 +71,19 @@ proxy-groups:
     proxies:
       - DIRECT
       - REJECT
-      - "WARP+"
+      - "WIREGUARDS"
       - "LOAD BALANCE"
-      - "SUPER ENCRYPT"
+      - "SEFR27"
       - "SEDE20"
       - "BDIX20"
       - "FR27KZ"
       - "DE20KZ"
+
+  - name: "WIREGUARDS"
+    type: select
+    proxies:
+      - "WARP+"
+      - "OracleWG"
 
   - name: "LOAD BALANCE"
     type: load-balance
@@ -74,7 +94,7 @@ proxy-groups:
       - "BDIX20"
     strategy: round-robin
 
-  - name: "SUPER ENCRYPT"
+  - name: "SEFR27"
     type: relay
     url: 'http://cp.cloudflare.com/'
     interval: 200
