@@ -71,7 +71,7 @@ proxies:
     mtu: 1280
     allowed_ips: ['0.0.0.0/0', '::/0']
 
-  - name: "OracleWG"
+  - name: "OracleWGx"
     type: wireguard
     server: wg2.nbhost.eu.org
     port: 51820
@@ -84,7 +84,27 @@ proxies:
     remote-dns-resolve: true
     udp: true
     dns: [94.140.14.14, 94.140.15.15, 2a10:50c0::ad1:ff, 2a10:50c0::ad2:ff]
-
+    
+  - name: "OracleWG"
+    type: wireguard
+    server: wg2.nbhost.eu.org
+    port: 51820
+    ip: 10.8.0.10
+    private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
+    public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
+    allowed-ips: ['0.0.0.0/0', '::/0']
+    preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
+    peers:
+      - server: wg2.nbhost.eu.org
+        port: 51820
+        public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
+        allowed_ips: ['0.0.0.0/0', '::/0']
+        preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
+    #mtu: 1280
+    #remote-dns-resolve: true
+    udp: true
+    dns: [94.140.14.14, 94.140.15.15, 2a10:50c0::ad1:ff, 2a10:50c0::ad2:ff]
+    
 proxy-groups:
   - name: "KZT BDIX BYPASS"
     type: select
