@@ -83,13 +83,25 @@ proxies:
     allowed-ips: ['0.0.0.0/0', '::/0']
     preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
     udp: true
-    
+
+  - name: "FREE WG"
+    type: wireguard
+    server: bd1.vpnjantit.com
+    port: 1024
+    ip: 192.168.6.167
+    public-key: y1/nN0uJq8VkvTov05boDYoR8dZJx7hsg3eEZ2jgEEA=
+    private-key: MIT9qAfzHSYLnaVU3Nel4+L+TqKrbjHTXTi+O/lvJ1Q=
+    #udp: true
+    dns: [94.140.14.14, 94.140.15.15, 2a10:50c0::ad1:ff, 2a10:50c0::ad2:ff]
+    allowed_ips: ['0.0.0.0/0', '::/0']
+
 proxy-groups:
   - name: "KZT BDIX BYPASS"
     type: select
     proxies:
       - DIRECT
       - REJECT
+      - "FREE WG"
       - "AUTO (Best Ping)"
       - "LOAD BALANCE"
       - "RELAY SERVER"
