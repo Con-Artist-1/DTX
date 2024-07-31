@@ -75,6 +75,7 @@ proxies:
   - name: "OracleWG"
     type: wireguard
     ip: 10.8.0.10
+    dns: [1.1.1.1, 8.8.8.8]
     private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
     peers:
       - server: wg2.nbhost.eu.org
