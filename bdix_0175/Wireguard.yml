@@ -1,0 +1,161 @@
+port: 4540
+allow-lan: false
+mode: rule
+log-level: silent
+ipv6: true
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  default-nameserver:
+    - 94.140.14.14 
+    - 94.140.15.15 
+  nameserver:
+    - 94.140.14.14 
+    - 94.140.15.15 
+    - https://dns.adguard-dns.com/dns-query
+  enhanced-mode: fake-ip 
+  fake-ip-range: 198.18.0.1/16 
+
+proxies:
+
+  - name: "WARP+ 1"
+    type: wireguard
+    server: engage.cloudflareclient.com
+    port: 2408
+    ip: 172.16.0.2
+    ipv6: 2606:4700:110:8a73:800d:2e64:204c:184f
+    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+    private-key: GCX6t2hSpaSzWcNzwTGQnqpuVPac+7BZlI7OsU/EtGQ=
+    udp: true
+    #dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
+    remote-dns-resolve: true
+    mtu: 1280
+    allowed_ips: ['0.0.0.0/0', '::/0']
+      
+  - name: "WARP+ 2"
+    type: wireguard
+    server: engage.cloudflareclient.com
+    port: 2408
+    ip: 172.16.0.2
+    ipv6: 2606:4700:110:8366:c8c8:9a26:38e6:3de0
+    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+    private-key: sPVZAhIYwGxTBP9cAgs9f/Zm786p/IO+DN5JWfi5slw=
+    udp: true
+    #dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
+    remote-dns-resolve: true
+    mtu: 1280
+    allowed_ips: ['0.0.0.0/0', '::/0']
+      
+  - name: "WARP+ 3"
+    type: wireguard
+    server: engage.cloudflareclient.com
+    port: 2408
+    ip: 172.16.0.2
+    ipv6: 2606:4700:110:815d:42d:d99b:f4e1:4cac
+    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+    private-key: yPe386mjX4aakakNqcjzC4ZPvtaHlzVN0lUCAlOnN1o=
+    udp: true
+    #dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
+    remote-dns-resolve: true
+    mtu: 1280
+    allowed_ips: ['0.0.0.0/0', '::/0']
+
+  - name: "JANTIT WG BD"
+    type: wireguard
+    server: bd1.vpnjantit.com
+    port: 1024
+    ip: 192.168.6.167
+    public-key: y1/nN0uJq8VkvTov05boDYoR8dZJx7hsg3eEZ2jgEEA=
+    private-key: MIT9qAfzHSYLnaVU3Nel4+L+TqKrbjHTXTi+O/lvJ1Q=
+    #udp: true
+    #dns: [94.140.14.14, 94.140.15.15, 2a10:50c0::ad1:ff, 2a10:50c0::ad2:ff]
+    allowed_ips: ['0.0.0.0/0', '::/0']
+
+proxy-groups:
+  - name: "KZT CLOUDFLARE BYPASS"
+    type: select
+    proxies:
+      - DIRECT
+      - REJECT
+      - "AUTO (Best Ping)"
+      - "WIREGUARDS"
+      - "WIREGUARD LOAD BALANCE"
+
+  - name: "WIREGUARDS"
+    type: select
+    proxies:
+      - "WARP+ 1"
+      - "WARP+ 2"
+      - "WARP+ 3"
+      - "JANTIT WG BD"
+  
+  - name: "WIREGUARD LOAD BALANCE"
+    type: load-balance
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    proxies:
+      - "WARP+ 1"
+      - "WARP+ 2"
+      - "WARP+ 3"
+      - "JANTIT WG BD"
+    strategy: round-robin
+      
+  - name: "AUTO (Best Ping)"
+    type: url-test
+    url: http://cp.cloudflare.com/
+    interval: 200
+    tolerance: 50
+    proxies:
+      - "WARP+ 1"
+      - "WARP+ 2"
+      - "WARP+ 3"
+      - "JANTIT WG BD"
+
+#script:
+#  shortcuts:
+#    NULLDNS: resolve_ip(host) == "0.0.0.0"
+
+rules:
+#  - SCRIPT,NULLDNS,REJECT 
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,::1/128,DIRECT,no-resolve
+  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
+  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+  - IP-CIDR6,fd00::/8,DIRECT,no-resolve
+  - DOMAIN-SUFFIX,ad.com,REJECT
+  - DOMAIN,analytics.google.com,REJECT
+  - DOMAIN,analyticsinsights-pa.googleapis.com,REJECT
+  - DOMAIN,analyticsreporting.googleapis.com,REJECT
+  - DOMAIN-SUFFIX,doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,googleadservices.com,REJECT
+  - DOMAIN-SUFFIX,googleadsserving.cn,REJECT
+  - DOMAIN-SUFFIX,googlesyndication.com,REJECT
+  - DOMAIN-SUFFIX,googletagmanager.com,REJECT
+  - DOMAIN-SUFFIX,googletagservices.com,REJECT
+  - DOMAIN-SUFFIX,google-analytics.com,REJECT
+  - DOMAIN,tracker.torrent.eu.org,DIRECT
+  - DOMAIN,tracker.opentrackr.org,DIRECT
+  - DOMAIN,open.stealth.si,DIRECT
+  - DOMAIN,exodus.desync.com,DIRECT
+  - DOMAIN-SUFFIX,ggpht.com,DIRECT
+  - DOMAIN,nyaa.tracker.wf,DIRECT
+  - DOMAIN-KEYWORD,adservice,REJECT
+  - DOMAIN-KEYWORD,analytics,REJECT
+  - DOMAIN-KEYWORD,analysis,REJECT
+  - DOMAIN-KEYWORD,googleads,REJECT
+  #- DOMAIN-KEYWORD,facebook,DIRECT
+  - DOMAIN-KEYWORD,torrentbd,DIRECT
+  #- DOMAIN-KEYWORD,fbcdn,DIRECT
+  - DOMAIN-KEYWORD,youtube,DIRECT
+  - DOMAIN-KEYWORD,googlevideo,DIRECT
+  - DOMAIN-KEYWORD,discoveryftp,DIRECT
+  #- DOMAIN-KEYWORD,whatsapp,DIRECT
+  - SRC-IP-CIDR,192.168.1.201/32,DIRECT
+  - IP-CIDR,103.209.41.178/16,DIRECT
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - MATCH,KZT CLOUDFLARE BYPASS
