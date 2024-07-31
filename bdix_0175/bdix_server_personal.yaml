@@ -74,15 +74,14 @@ proxies:
 
   - name: "OracleWG"
     type: wireguard
+    server: wg2.nbhost.eu.org
+    port: 51820
     ip: 10.8.0.10
     dns: [1.1.1.1, 8.8.8.8]
     private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
-    peers:
-      - server: wg2.nbhost.eu.org
-        port: 51820
-        public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
-        allowed-ips: ['0.0.0.0/0', '::/0']
-        pre-shared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
+    public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
+    allowed-ips: ['0.0.0.0/0', '::/0']
+    preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
     udp: true
     
 proxy-groups:
