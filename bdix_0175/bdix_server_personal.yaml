@@ -101,12 +101,12 @@ proxy-groups:
     proxies:
       - DIRECT
       - REJECT
-      - "FREE WG"
       - "AUTO (Best Ping)"
       - "LOAD BALANCE"
       - "RELAY SERVER"
       - "BDIX SERVER"
       - "WARP+"
+      - "FREE WG"
       - "OracleWG"
       
   - name: "BDIX SERVER"
