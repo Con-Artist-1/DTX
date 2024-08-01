@@ -50,7 +50,6 @@ proxies:
     server: 103.40.226.165
     port: 9879
 
-  
   - name: "WARP+"
     type: wireguard
     server: engage.cloudflareclient.com
@@ -64,30 +63,6 @@ proxies:
     mtu: 1280
     allowed_ips: ['0.0.0.0/0', '::/0']
 
-  - name: "OracleWG"
-    type: wireguard
-    server: wg2.nbhost.eu.org
-    port: 51820
-    ip: 10.8.0.10
-    dns: [1.1.1.1, 8.8.8.8]
-    private-key: WFhjKJXnCZDO33wVtv5zPrWj5kXnISN5jYZ2YPTO20U=
-    public-key: pk9UM0tIpZ+yVuFdGq5t3J82rOZ6I01nNGhY081sKDY=
-    allowed-ips: ['0.0.0.0/0', '::/0']
-    preshared-key: aCUD+27f5dMUThJirWNDtGNLTXmxJvZPgA662gTBUFk=
-    udp: true
-    mtu: 1280
-    
-  - name: "FREE WG BD"
-    type: wireguard
-    server: bd1.vpnjantit.com
-    port: 1024
-    ip: 192.168.6.167
-    public-key: y1/nN0uJq8VkvTov05boDYoR8dZJx7hsg3eEZ2jgEEA=
-    private-key: MIT9qAfzHSYLnaVU3Nel4+L+TqKrbjHTXTi+O/lvJ1Q=
-    #udp: true
-    #dns: [94.140.14.14, 94.140.15.15, 2a10:50c0::ad1:ff, 2a10:50c0::ad2:ff]
-    allowed_ips: ['0.0.0.0/0', '::/0']
-  
 proxy-groups:
   - name: "KAB BDIX BYPASS"
     type: select
@@ -95,13 +70,11 @@ proxy-groups:
     proxies:
       - DIRECT
       - REJECT
+      - "BDIX SERVER"
       - "AUTO (Best Ping)"
       - "LOAD BALANCE"
       - "RELAY SERVER"
-      - "BDIX SERVER"
       - "WARP+"
-      - "FREE WG BD"
-      - "OracleWG"
       
   - name: "BDIX SERVER"
     type: select
@@ -196,12 +169,9 @@ rules:
   - DOMAIN-KEYWORD,analytics,REJECT
   - DOMAIN-KEYWORD,analysis,REJECT
   - DOMAIN-KEYWORD,googleads,REJECT
-  - DOMAIN-KEYWORD,facebook,RELAY SERVER
-  - DOMAIN-KEYWORD,torrentbd,DIRECT
-  - DOMAIN-KEYWORD,fbcdn,RELAY SERVER
-  - DOMAIN-KEYWORD,youtube,DIRECT
-  - DOMAIN-KEYWORD,googlevideo,DIRECT
   - DOMAIN-KEYWORD,discoveryftp,DIRECT
+  - DOMAIN-KEYWORD,circleftp,BDIX1,BDIX2 #CIRCLE FTP SERVER
+  - IP-CIDR,15.1.1.50/24,BDIX1,BDIX2
   #- DOMAIN-KEYWORD,whatsapp,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
   - IP-CIDR,103.209.41.178/16,DIRECT
