@@ -15,30 +15,36 @@ dns:
     - https://dns.adguard-dns.com/dns-query
   enhanced-mode: fake-ip 
   fake-ip-range: 198.18.0.1/16 
+
+proxy-providers:
+  LAGAZIAN_VMESS:
+    type: http
+    url: "https://raw.githubusercontent.com/lagzian/SS-Collector/main/vmess_clash.yaml"
+    interval: 360
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 500
+      timeout: 5000
+      lazy: true
+
 proxies:
     
-  - name: "FR27 RAW"
-    type: ss
-    server: 145.239.6.202
-    port: 9101
-    password: e4FCWrgpkji3QY
-    cipher: aes-256-gcm
-
-  - name: "DE20 RAW"
-    type: ss
-    server: 23.158.56.196
-    port: 8882
-    password: kDWvXYZoTBcGkC4
-    cipher: aes-256-gcm
+  - name: "🇧🇩BDIX20"
+    type: socks5
+    server: 182.160.121.90
+    port: 1052
+    username: R.Tanvir27/08
+    password: R.Tanvir27/08
     
-  - name: "BDIX1" #own bdix server
+  - name: "🇧🇩BDIX1" #own BDIX server
     type: socks5
     server: 122.102.35.105 #proxy ip here
     port: 1080 #port here
     username: user1 #username here
     password: user1 #password here
   
-  - name: "BDIX2" #own bdix server
+  - name: "🇧🇩BDIX2" #own BDIX server
     type: socks5
     server: 103.111.226.248
     port: 9090
@@ -50,88 +56,82 @@ proxies:
     server: 103.40.226.165
     port: 9879
 
-  - name: "WARP+"
-    type: wireguard
-    server: engage.cloudflareclient.com
-    port: 2408
-    ip: 172.16.0.2
-    ipv6: 2606:4700:110:8a73:800d:2e64:204c:184f
-    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
-    private-key: GCX6t2hSpaSzWcNzwTGQnqpuVPac+7BZlI7OsU/EtGQ=
-    udp: true
-    dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
-    mtu: 1280
-    allowed_ips: ['0.0.0.0/0', '::/0']
-
 proxy-groups:
-  - name: "KAB BDIX BYPASS"
+
+  - name: "KZT BDIX BYPASS"
     type: select
-    url: 'http://cp.cloudflare.com/'
     proxies:
       - DIRECT
       - REJECT
-      - "BDIX SERVER"
-      - "AUTO (Best Ping)"
-      - "LOAD BALANCE"
+      - "🇧🇩BDIX SERVER"
+      - "FOREIGN SERVER"
+      - "🇧🇩BDIX AUTO (Best Ping)"
+      - "FOREIGN AUTO (Best Ping)"
+      - "🇧🇩BDIX LOAD BALANCE"
+      - "FOREIGN LOAD BALANCE"
       - "RELAY SERVER"
-      - "WARP+"
       
-  - name: "BDIX SERVER"
+  - name: "🇧🇩BDIX SERVER"
     type: select
     url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
     proxies:
-      - "BDIX1"
-      - "BDIX2"
+      - "🇧🇩BDIX20"
+      - "🇧🇩BDIX1"
+      - "🇧🇩BDIX2"
       - "HTTP P1"
-      
-  - name: "RELAY SERVER"
+  
+  - name: "FOREIGN SERVER"
     type: select
-    url: 'http://cp.cloudflare.com/'
+    use:
+      - LAGAZIAN_VMESS
+    
+  - name: "RELAY SERVER"
+    type: relay
     proxies:
-      - "FR27 RAW"
-      - "DE20 RAW"
-      - "FR27 Relay"
-      - "DE20 Relay"
+      - "🇧🇩BDIX SERVER"
+      - "FOREIGN SERVER"
 
-  - name: "LOAD BALANCE"
+  - name: "🇧🇩BDIX LOAD BALANCE"
     type: load-balance
     url: 'http://cp.cloudflare.com/'
     interval: 200
     tolerance: 50
     proxies:
-      - "BDIX1"
-      - "BDIX2"
+      - "🇧🇩BDIX20"
+      - "🇧🇩BDIX1"
+      - "🇧🇩BDIX2"
       - "HTTP P1"
     strategy: round-robin
+
+  - name: "FOREIGN LOAD BALANCE"
+    type: load-balance
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - LAGAZIAN_VMESS
+    strategy: round-robin
       
-  - name: "AUTO (Best Ping)"
+  - name: "🇧🇩BDIX AUTO (Best Ping)"
     type: url-test
     url: http://cp.cloudflare.com/
     interval: 300
     tolerance: 50
     proxies:
-      - "BDIX1"
-      - "BDIX2"
+      - "🇧🇩BDIX20"
+      - "🇧🇩BDIX1"
+      - "🇧🇩BDIX2"
       - "HTTP P1"
 
-  - name: "FR27 Relay"
-    type: relay
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
+  - name: "FOREIGN AUTO (Best Ping)"
+    type: url-test
+    url: http://cp.cloudflare.com/
+    interval: 300
     tolerance: 50
-    proxies:
-      -  "BDIX SERVER"
-      -  "FR27 RAW"
-
-  - name: "DE20 Relay"
-    type: relay
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    proxies:
-      -  "BDIX SERVER"
-      -  "DE20 RAW"
-  
+    use:
+      - LAGAZIAN_VMESS
 
 #script:
 #  shortcuts:
@@ -139,7 +139,7 @@ proxy-groups:
 
 rules:
 #  - SCRIPT,NULLDNS,REJECT 
-  - IP-CIDR,0.0.0.0/32,REJECT #PATCH FOR META AND CLASH BUG
+  - IP-CIDR,0.0.0.0/32,REJECT #PATCH  SCRIPT SHORTCUT FOR BOTH  CLASH META AND  CLASH
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
@@ -170,13 +170,15 @@ rules:
   - DOMAIN-KEYWORD,analytics,REJECT
   - DOMAIN-KEYWORD,analysis,REJECT
   - DOMAIN-KEYWORD,googleads,REJECT
+  #- DOMAIN-KEYWORD,facebook,DIRECT
+  - DOMAIN-KEYWORD,torrentbd,DIRECT
+  #- DOMAIN-KEYWORD,fbcdn,DIRECT
+  - DOMAIN-KEYWORD,youtube,DIRECT
+  - DOMAIN-KEYWORD,googlevideo,DIRECT
   - DOMAIN-KEYWORD,discoveryftp,DIRECT
-  - DOMAIN-KEYWORD,circleftp,BDIX1,BDIX2 #CIRCLE FTP SERVER
-  - IP-CIDR,15.1.1.50/24,BDIX1,BDIX2
-  - DOMAIN-KEYWORD,FTPBD,BDIX1
   #- DOMAIN-KEYWORD,whatsapp,DIRECT
   - IP-CIDR,103.112.62.79/32,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
   - IP-CIDR,103.209.41.178/16,DIRECT
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - MATCH,KAB BDIX BYPASS
+  - MATCH,KZT BDIX BYPASS
