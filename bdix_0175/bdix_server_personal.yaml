@@ -17,6 +17,7 @@ dns:
   fake-ip-range: 198.18.0.1/16 
 
 proxy-providers:
+
   LAGAZIAN_VMESS:
     type: http
     url: "https://raw.githubusercontent.com/lagzian/SS-Collector/main/vmess_clash.yaml"
@@ -27,9 +28,20 @@ proxy-providers:
       interval: 500
       timeout: 5000
       lazy: true
-
+      
+  MY_WIREGUARDS:
+    type: http
+    url: "https://kztanvir.github.io//bdix_0175/Wireguard.yml"
+    interval: 360
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 500
+      timeout: 5000
+      lazy: true
+      
 proxies:
-    
+
   - name: "🇧🇩BDIX20"
     type: socks5
     server: 182.160.121.90
@@ -70,6 +82,7 @@ proxy-groups:
       - "🇧🇩BDIX LOAD BALANCE"
       - "FOREIGN LOAD BALANCE"
       - "RELAY SERVER"
+      - "WIREGUARDS WARP+"
       
   - name: "🇧🇩BDIX SERVER"
     type: select
@@ -132,6 +145,15 @@ proxy-groups:
     tolerance: 50
     use:
       - LAGAZIAN_VMESS
+      
+  - name: "WIREGUARDS WARP+"
+    type: url-test
+    url: http://cp.cloudflare.com/
+    interval: 300
+    tolerance: 50
+    use:
+      - MY_WIREGUARDS
+    
 
 #script:
 #  shortcuts:
