@@ -97,15 +97,26 @@ proxy-groups:
   
   - name: "FOREIGN SERVER"
     type: select
+    url: http://cp.cloudflare.com/
+    interval: 300
+    tolerance: 50
     use:
       - LAGAZIAN_VMESS
-    
+          
+  - name: "WIREGUARDS WARP+"
+    type: select
+    url: http://cp.cloudflare.com/
+    interval: 300
+    tolerance: 50
+    use:
+      - MY_WIREGUARDS
+      
   - name: "RELAY SERVER"
     type: relay
     proxies:
       - "🇧🇩BDIX SERVER"
       - "FOREIGN SERVER"
-
+  
   - name: "🇧🇩BDIX LOAD BALANCE"
     type: load-balance
     url: 'http://cp.cloudflare.com/'
@@ -145,15 +156,6 @@ proxy-groups:
     tolerance: 50
     use:
       - LAGAZIAN_VMESS
-      
-  - name: "WIREGUARDS WARP+"
-    type: url-test
-    url: http://cp.cloudflare.com/
-    interval: 300
-    tolerance: 50
-    use:
-      - MY_WIREGUARDS
-    
 
 #script:
 #  shortcuts:
