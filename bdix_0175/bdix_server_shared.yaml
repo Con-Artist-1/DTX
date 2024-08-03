@@ -30,13 +30,6 @@ proxy-providers:
 
 proxies:
     
-  - name: "🇧🇩BDIX20"
-    type: socks5
-    server: 182.160.121.90
-    port: 1052
-    username: R.Tanvir27/08
-    password: R.Tanvir27/08
-    
   - name: "🇧🇩BDIX1" #own BDIX server
     type: socks5
     server: 122.102.35.105 #proxy ip here
@@ -77,7 +70,6 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
-      - "🇧🇩BDIX20"
       - "🇧🇩BDIX1"
       - "🇧🇩BDIX2"
       - "HTTP P1"
@@ -99,7 +91,6 @@ proxy-groups:
     interval: 200
     tolerance: 50
     proxies:
-      - "🇧🇩BDIX20"
       - "🇧🇩BDIX1"
       - "🇧🇩BDIX2"
       - "HTTP P1"
@@ -120,7 +111,6 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - "🇧🇩BDIX20"
       - "🇧🇩BDIX1"
       - "🇧🇩BDIX2"
       - "HTTP P1"
@@ -175,7 +165,10 @@ rules:
   #- DOMAIN-KEYWORD,fbcdn,DIRECT
   - DOMAIN-KEYWORD,youtube,DIRECT
   - DOMAIN-KEYWORD,googlevideo,DIRECT
-  - DOMAIN-KEYWORD,discoveryftp,DIRECT
+  - DOMAIN-KEYWORD,discoveryftp,DIRECT  
+  - DOMAIN-KEYWORD,circleftp,BDIX1 #CIRCLE FTP SERVER
+  - IP-CIDR,15.1.1.50/24,BDIX1
+  - DOMAIN-KEYWORD,FTPBD,BDIX1
   #- DOMAIN-KEYWORD,whatsapp,DIRECT
   - IP-CIDR,103.112.62.79/32,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
