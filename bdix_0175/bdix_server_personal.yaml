@@ -101,7 +101,6 @@ proxy-groups:
       - "🇧🇩BDIX20"
       - "🇧🇩BDIX1"
       - "🇧🇩BDIX2"
-      - "HTTP P1"
   
   - name: "FOREIGN SERVER"
     type: select
@@ -136,7 +135,6 @@ proxy-groups:
       - "🇧🇩BDIX20"
       - "🇧🇩BDIX1"
       - "🇧🇩BDIX2"
-      - "HTTP P1"
     strategy: round-robin
 
   - name: "FOREIGN LOAD BALANCE"
@@ -157,7 +155,6 @@ proxy-groups:
       - "🇧🇩BDIX20"
       - "🇧🇩BDIX1"
       - "🇧🇩BDIX2"
-      - "HTTP P1"
 
   - name: "FOREIGN AUTO (Best Ping)"
     type: url-test
