@@ -63,11 +63,6 @@ proxies:
     username: MX
     password: XM
 
-  - name: "HTTP P1"
-    type: http
-    server: 103.40.226.165
-    port: 9879
-
   - name: "KAB Cloud"
     type: wireguard
     server: bdix1.duckdns.org
