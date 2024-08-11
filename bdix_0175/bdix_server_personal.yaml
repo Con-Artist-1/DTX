@@ -48,6 +48,7 @@ proxies:
     port: 1052
     username: R.Tanvir27/08
     password: R.Tanvir27/08
+    udp: true
     
   - name: "🇧🇩BDIX1" #own BDIX server
     type: socks5
