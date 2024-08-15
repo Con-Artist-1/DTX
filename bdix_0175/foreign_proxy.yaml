@@ -140,7 +140,6 @@ proxies:
   - {"name":"🇵🇱PL(AzadNet.t.me)_013","type":"ss","server":"51.77.53.200","port":9101,"password":"e4FCWrgpkji3QY","cipher":"aes-256-gcm"}
   - {"name":"🇵🇱PL(AzadNet.t.me)_003","type":"ss","server":"51.77.53.200","port":7307,"password":"FoOiGlkAA9yPEGP","cipher":"aes-256-gcm"}
   - {"name":"🇧🇬BG(AzadNet.t.me)_001","type":"ss","server":"213.183.63.69","port":9060,"password":"ueLXVkvh4hckhErQ","cipher":"aes-256-cfb"}
-  - {"name":"🇫🇮FI(AzadNet.t.me)_001","type":"vless","server":"81.31.245.106","port":443,"udp":true,"uuid":"a034f973-9a9c-4dfa-897e-e10647ac7109","tls":true,"servername":"microsoft.com","flow":"xtls-rprx-vision","network":"tcp","reality-opts":{"public-key":"5JA5Y0-T4zvUCJ018TbvhhZ0jkNPjuUFbdm2K2Rwiz4","short-id":"182f0114"},"client-fingerprint":"chrome"}
   - {"name":"🇵🇱PL(AzadNet.t.me)_015","type":"ss","server":"51.77.53.200","port":8881,"password":"kDWvXYZoTBcGkC4","cipher":"aes-256-gcm"}
   - {"name":"🇵🇱PL(AzadNet.t.me)_022","type":"ss","server":"51.77.53.200","port":7002,"password":"RexnBgU7EV5ADxG","cipher":"aes-256-gcm"}
   - {"name":"🇦🇫AF(AzadNet.t.me)_001","type":"ss","server":"121.127.46.147","port":989,"password":"f8f7aCzcPKbsF8p3","cipher":"aes-256-cfb"}
@@ -164,7 +163,6 @@ proxies:
   - {"name":"🇧🇬BG(AzadNet.t.me)_017","type":"ss","server":"213.183.63.69","port":9027,"password":"EXN3S3eQpjE7EJu8","cipher":"aes-256-cfb"}
   - {"name":"🇵🇱PL(AzadNet.t.me)_008","type":"ss","server":"51.77.53.200","port":3389,"password":"Y6R9pAtvxxzmGC","cipher":"aes-256-gcm"}
   - {"name":"🇫🇷FR(AzadNet.t.me)_003","type":"trojan","server":"frt2.sshocean.net","port":443,"udp":true,"password":"b3902e81-6260-4932-bcc9-708445fe40b4","skip-cert-verify":true,"network":"tcp"}
-  - {"name":"🇧🇪BE(AzadNet.t.me)_003","type":"vless","server":"57.129.32.5","port":443,"uuid":"a318d48d-9882-4d88-8c73-be6e0721d0f3","tls":true,"servername":"sweet.footballlovernews.com","network":"ws","ws-opts":{"path":"/sweet"},"client-fingerprint":"chrome"}
   - {"name":"🇵🇱PL(AzadNet.t.me)_005","type":"ss","server":"51.77.53.200","port":7306,"password":"FoOiGlkAA9yPEGP","cipher":"aes-256-gcm"}
   - {"name":"🇯🇵JP(AzadNet.t.me)_005","type":"trojan","server":"172.105.230.133","port":3306,"udp":true,"password":"3c4e10af98c30972","sni":"n2.gladns.com","skip-cert-verify":true,"network":"tcp"}
   - {"name":"🇧🇬BG(AzadNet.t.me)_021","type":"ss","server":"213.183.63.69","port":9020,"password":"BNmAXXxAHYpTRdzu","cipher":"aes-256-cfb"}
@@ -243,7 +241,6 @@ proxies:
   - {"name":"🇮🇷IR(AzadNet.t.me)_004","type":"ss","server":"188.212.132.20","port":52952,"password":"XRUwpkSouW5HCTUFUxErfnL5AmahofrjznVrAu2iNFMFGUCrChznAULhuHGAQdC463mzcgo2jV546Ut5HKhk3pz956cHYYyc","cipher":"chacha20-ietf-poly1305"}
   - {"name":"🇳🇱NL(AzadNet.t.me)_006","type":"ss","server":"45.89.52.66","port":9029,"password":"dU3DSNS8wYPXzEKw","cipher":"aes-256-cfb"}
   - {"name":"🇺🇸US(AzadNet.t.me)_285","type":"trojan","server":"de1.test3.net","port":443,"udp":true,"password":"36d734e0-c059-11ee-9e46-1239d0255272","skip-cert-verify":true,"network":"tcp"}
-  - {"name":"🇧🇪BE(AzadNet.t.me)_001","type":"vless","server":"57.128.164.43","port":443,"uuid":"ff3c4db3-2259-479e-a0e0-7af7d1d429db","tls":true,"servername":"shaliest.toptechnonews.com","network":"ws","ws-opts":{"path":"/nimws"},"client-fingerprint":"chrome"}
   - {"name":"🏳️UN(AzadNet.t.me)_009","type":"trojan","server":"upload.soft98.download","port":443,"udp":true,"password":"a2c8194b-fcfd-4c39-a6bd-31ea9f4ea671","sni":"upload.soft98.download","skip-cert-verify":true,"network":"tcp"}
   - {"name":"🇹🇷TR(AzadNet.t.me)_001","type":"ss","server":"185.123.101.241","port":989,"password":"f8f7aCzcPKbsF8p3","cipher":"aes-256-cfb"}
   - {"name":"🇨🇦CA(AzadNet.t.me)_016","type":"ss","server":"ca225.vpnbook.com","port":80,"password":"JIhN6rBKkaEboLNXVSv5rq","cipher":"chacha20-ietf-poly1305"}
@@ -365,7 +362,6 @@ proxies:
   - {"name":"🇺🇸US(AzadNet.t.me)_223","type":"ss","server":"54.36.174.181","port":8000,"password":"KixLvKzwjekG00rm","cipher":"aes-256-gcm"}
   - {"name":"🇺🇸US(AzadNet.t.me)_336","type":"trojan","server":"23.247.137.70","port":3389,"udp":true,"password":"d4e41ff772c7fd45","skip-cert-verify":true,"network":"tcp"}
   - {"name":"🇺🇸US(AzadNet.t.me)_299","type":"trojan","server":"au.mjt000.com","port":443,"udp":true,"password":"0cdc54e5-c8e1-4350-a7b2-047e5f4c02f9","sni":"au.mjt000.com","skip-cert-verify":true,"network":"tcp"}
-  - {"name":"🇧🇪BE(AzadNet.t.me)_002","type":"vless","server":"57.129.30.134","port":443,"uuid":"d15f5947-f95c-4cc4-b8e0-20219e4bc2d1","tls":true,"servername":"divide.footballlovernews.com","network":"ws","ws-opts":{"path":"/divide"},"client-fingerprint":"chrome"}
   - {"name":"🇺🇸US(AzadNet.t.me)_436","type":"vmess","server":"172.111.36.108","port":443,"cipher":"auto","uuid":"03fcc618-b93d-6796-6aed-8a38c975d581","alterId":0,"tls":true,"skip-cert-verify":true,"servername":"irene.lat","network":"ws","ws-opts":{"path":"/linkvws","headers":{"host":"irene.lat"}}}
   - {"name":"🇮🇳IN(AzadNet.t.me)_001","type":"ss","server":"180.149.44.121","port":989,"password":"f8f7aCzcPKbsF8p3","cipher":"aes-256-cfb"}
   - {"name":"🇺🇸US(AzadNet.t.me)_472","type":"vmess","server":"50.114.243.61","port":43834,"cipher":"auto","uuid":"b246e34d-bbd1-4016-8f74-ea461c37e411","alterId":0,"tls":false,"skip-cert-verify":true,"servername":"","network":"tcp"}
@@ -566,7 +562,6 @@ proxies:
   - {"name":"🇺🇸US(AzadNet.t.me)_311","type":"vmess","server":"172.67.131.108","port":443,"cipher":"auto","uuid":"1052f24e-7b09-45eb-b0c5-d858eb124192","alterId":0,"tls":true,"skip-cert-verify":true,"servername":"glweidf.cfd","network":"ws","ws-opts":{"path":"/linkws","headers":{"host":"glweidf.cfd"}}}
   - {"name":"🇺🇸US(AzadNet.t.me)_104","type":"trojan","server":"104.16.149.118","port":443,"udp":true,"password":"7d618f20-bbc7-11ee-a803-1239d0255272","sni":"de1.test3.net","skip-cert-verify":true,"network":"tcp"}
   - {"name":"🇺🇸US(AzadNet.t.me)_113","type":"trojan","server":"104.21.39.134","port":443,"udp":true,"password":"29ea82cf-f956-42b2-a5dc-35feea39e7ff","sni":"glc-tw1.windowsupdatea.com","skip-cert-verify":true,"network":"tcp"}
-  - {"name":"🇺🇸US(AzadNet.t.me)_316","type":"vless","server":"pardazeshvpn-tg20.pages.dev","port":443,"uuid":"826e43d2-dbe9-41a6-bbf8-3aed2f93f5d4","tls":true,"servername":"pardazeshvpn-tg20.pages.dev","network":"ws","ws-opts":{"path":"/?ed=2048"},"client-fingerprint":"randomized"}
   - {"name":"🇺🇸US(AzadNet.t.me)_015","type":"trojan","server":"23.227.39.163","port":443,"udp":true,"password":"3f23c1eb-ace4-49ec-a7f0-f591b006b95a","sni":"jde1.jsjc.sbs","skip-cert-verify":true,"network":"tcp"}
   - {"name":"🇺🇸US(AzadNet.t.me)_361","type":"trojan","server":"162.159.136.208","port":443,"udp":true,"password":"89ce124f-42d1-4c90-b9d2-bde2861ae615","sni":"us4.pqjc.buzz","skip-cert-verify":true,"network":"tcp"}
   - {"name":"🇺🇸US(AzadNet.t.me)_359","type":"trojan","server":"104.17.175.159","port":443,"udp":true,"password":"8c4c1021-3352-4c76-b4b6-26c38a137f92","sni":"jnl1.jsjc.sbs","skip-cert-verify":true,"network":"tcp"}
