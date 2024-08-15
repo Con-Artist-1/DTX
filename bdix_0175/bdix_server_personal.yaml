@@ -48,7 +48,6 @@ proxies:
     port: 1052
     username: R.Tanvir27/08
     password: R.Tanvir27/08
-    udp: true
     
   - name: "🇧🇩BDIX1" #own BDIX server
     type: socks5
@@ -137,6 +136,7 @@ proxy-groups:
       - "🇧🇩BDIX1"
       - "🇧🇩BDIX2"
     strategy: round-robin
+    lazy: true
 
   - name: "FOREIGN LOAD BALANCE"
     type: load-balance
@@ -202,16 +202,17 @@ rules:
   - DOMAIN-KEYWORD,analytics,REJECT
   - DOMAIN-KEYWORD,analysis,REJECT
   - DOMAIN-KEYWORD,googleads,REJECT
-  #- DOMAIN-KEYWORD,facebook,DIRECT
+  - DOMAIN-KEYWORD,facebook,DIRECT
   - DOMAIN-KEYWORD,torrentbd,DIRECT
-  #- DOMAIN-KEYWORD,fbcdn,DIRECT
+  - DOMAIN-KEYWORD,fbcdn,DIRECT
   - DOMAIN-KEYWORD,youtube,DIRECT
   - DOMAIN-KEYWORD,googlevideo,DIRECT
   - DOMAIN-KEYWORD,discoveryftp,DIRECT  
   - DOMAIN-KEYWORD,circleftp,🇧🇩BDIX1 #CIRCLE FTP SERVER
   - IP-CIDR,15.1.1.50/24,🇧🇩BDIX1
   - DOMAIN-KEYWORD,ftpbd,🇧🇩BDIX1
-  #- DOMAIN-KEYWORD,whatsapp,DIRECT
+  - DOMAIN-KEYWORD,torrentbd,DIRECT
+  - DOMAIN-KEYWORD,whatsapp,DIRECT
   - IP-CIDR,103.112.62.79/32,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
   - IP-CIDR,103.209.41.178/16,DIRECT
