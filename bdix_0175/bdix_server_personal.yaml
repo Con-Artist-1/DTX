@@ -18,20 +18,9 @@ dns:
 
 proxy-providers:
 
-  LAGAZIAN_VMESS:
+  AZADNET:
     type: http
-    url: "https://raw.githubusercontent.com/lagzian/SS-Collector/main/vmess_clash.yaml"
-    interval: 360
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 500
-      timeout: 5000
-      lazy: true
-      
-  MY_WIREGUARDS:
-    type: http
-    url: "https://kztanvir.github.io//bdix_0175/Wireguard.yml"
+    url: "https://kztanvir.github.io/bdix_0175/foreign_proxy.yaml"
     interval: 360
     health-check:
       enable: true
@@ -63,19 +52,6 @@ proxies:
     username: MX
     password: XM
 
-  - name: "KAB Cloud"
-    type: wireguard
-    server: bdix1.duckdns.org
-    port: 51820
-    ip: 10.64.9.23
-    public-key: 5lEtNeBA/PWv78YLvx8i+/kMtUmy5aIDqXSkDPEPKno=
-    private-key: KBtoLdAw1KAsVmlF2S4jHLei0U66kuqbMxLCvtxip14=
-    preshared-key: 4uZKpZPkcgt4yf/sy2VZf3PfA8M6JPQ+ijZcz0wu87c=
-    udp: true
-    #dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
-    mtu: 1280
-    allowed_ips: ['0.0.0.0/0', '::/0']
-
 proxy-groups:
 
   - name: "KZT BDIX BYPASS"
@@ -90,7 +66,6 @@ proxy-groups:
       - "🇧🇩BDIX LOAD BALANCE"
       - "FOREIGN LOAD BALANCE"
       - "RELAY SERVER"
-      - "WIREGUARDS WARP+"
       
   - name: "🇧🇩BDIX SERVER"
     type: select
@@ -108,17 +83,7 @@ proxy-groups:
     interval: 300
     tolerance: 50
     use:
-      - LAGAZIAN_VMESS
-          
-  - name: "WIREGUARDS WARP+"
-    type: select
-    url: http://cp.cloudflare.com/
-    interval: 300
-    tolerance: 50
-    use:
-      - MY_WIREGUARDS
-    proxies:
-      - "KAB Cloud"
+      - AZADNET
       
   - name: "RELAY SERVER"
     type: relay
@@ -144,7 +109,7 @@ proxy-groups:
     interval: 200
     tolerance: 50
     use:
-      - LAGAZIAN_VMESS
+      - AZADNET
     strategy: round-robin
       
   - name: "🇧🇩BDIX AUTO (Best Ping)"
@@ -163,7 +128,7 @@ proxy-groups:
     interval: 300
     tolerance: 50
     use:
-      - LAGAZIAN_VMESS
+      - AZADNET
 
 #script:
 #  shortcuts:
