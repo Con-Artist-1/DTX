@@ -67,6 +67,7 @@ proxy-groups:
       - "🇧🇩BDIX LOAD BALANCE"
       - "FOREIGN LOAD BALANCE"
       - "RELAY SERVER"
+      - "RELAY SERVER (FOREIGN AUTO)"
       
   - name: "🇧🇩BDIX SERVER"
     type: select
@@ -91,6 +92,12 @@ proxy-groups:
     proxies:
       - "🇧🇩BDIX SERVER"
       - "FOREIGN SERVER"
+
+  - name: "RELAY SERVER (FOREIGN AUTO)"
+    type: relay
+    proxies:
+      - "🇧🇩BDIX SERVER"
+      - "FOREIGN AUTO (Best Ping)"
   
   - name: "🇧🇩BDIX LOAD BALANCE"
     type: load-balance
