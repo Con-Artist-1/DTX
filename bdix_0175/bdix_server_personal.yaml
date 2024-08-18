@@ -176,8 +176,9 @@ rules:
   - DOMAIN-KEYWORD,analysis,REJECT
   - DOMAIN-KEYWORD,googleads,REJECT
   - DOMAIN-KEYWORD,facebook,DIRECT
-  - DOMAIN-KEYWORD,torrentbd,DIRECT
   - DOMAIN-KEYWORD,fbcdn,DIRECT
+  - DOMAIN-KEYWORD,messenger,DIRECT
+  - DOMAIN-KEYWORD,torrentbd,DIRECT
   - DOMAIN-KEYWORD,youtube,DIRECT
   - DOMAIN-KEYWORD,googlevideo,DIRECT
   - DOMAIN-KEYWORD,discoveryftp,DIRECT  
