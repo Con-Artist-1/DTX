@@ -6,14 +6,14 @@ proxies:
     username: R.Tanvir27/08
     password: R.Tanvir27/08
     
-  - name: "🇧🇩BDIX1" #own BDIX server
+  - name: "🇧🇩BDIX1 CFTP" #own BDIX server
     type: socks5
     server: 122.102.35.105 #proxy ip here
     port: 1080 #port here
     username: user1 #username here
     password: user1 #password here
   
-  - name: "🇧🇩BDIX2" #own BDIX server
+  - name: "🇧🇩BDIX2 CFTP" #own BDIX server
     type: socks5
     server: 103.111.226.248
     port: 9090
