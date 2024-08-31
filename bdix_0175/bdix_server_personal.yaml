@@ -12,7 +12,7 @@ dns:
   nameserver:
     - 94.140.14.14 
     - 94.140.15.15 
-    - https://dns.adguard-dns.com/dns-query
+    - https://d.adguard-dns.com/dns-query/c2b3f2f3
   enhanced-mode: fake-ip 
   fake-ip-range: 198.18.0.1/16 
 
@@ -29,29 +29,18 @@ proxy-providers:
       interval: 500
       timeout: 5000
       lazy: true
-      
-proxies:
 
-  - name: "🇧🇩BDIX20"
-    type: socks5
-    server: 182.160.121.90
-    port: 1052
-    username: R.Tanvir27/08
-    password: R.Tanvir27/08
-    
-  - name: "🇧🇩BDIX1" #own BDIX server
-    type: socks5
-    server: 122.102.35.105 #proxy ip here
-    port: 1080 #port here
-    username: user1 #username here
-    password: user1 #password here
-  
-  - name: "🇧🇩BDIX2" #own BDIX server
-    type: socks5
-    server: 103.111.226.248
-    port: 9090
-    username: MX
-    password: XM
+  TANVIR_NET:
+    type: http
+    url: "https://kztanvir.github.io/bdix_0175/bdix_servers.yaml"
+    interval: 360
+    path: ./providers/tanvir.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 500
+      timeout: 5000
+      lazy: true
 
 proxy-groups:
 
@@ -74,10 +63,8 @@ proxy-groups:
     url: 'http://cp.cloudflare.com/'
     interval: 200
     tolerance: 50
-    proxies:
-      - "🇧🇩BDIX20"
-      - "🇧🇩BDIX1"
-      - "🇧🇩BDIX2"
+    use:
+      - TANVIR_NET
   
   - name: "FOREIGN SERVER"
     type: select
@@ -86,7 +73,16 @@ proxy-groups:
     tolerance: 50
     use:
       - AZADNET
-      
+    
+  - name: "CIRCLEFTP"
+    type: select
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - TANVIR_NET
+    filter: 'CFTP'
+
   - name: "RELAY SERVER"
     type: relay
     proxies:
@@ -104,10 +100,8 @@ proxy-groups:
     url: 'http://cp.cloudflare.com/'
     interval: 200
     tolerance: 50
-    proxies:
-      - "🇧🇩BDIX20"
-      - "🇧🇩BDIX1"
-      - "🇧🇩BDIX2"
+    use:
+      - TANVIR_NET
     strategy: round-robin
     lazy: true
 
@@ -125,10 +119,8 @@ proxy-groups:
     url: http://cp.cloudflare.com/
     interval: 300
     tolerance: 50
-    proxies:
-      - "🇧🇩BDIX20"
-      - "🇧🇩BDIX1"
-      - "🇧🇩BDIX2"
+    use:
+      - TANVIR_NET
 
   - name: "FOREIGN AUTO (Best Ping)"
     type: url-test
@@ -182,9 +174,8 @@ rules:
   - DOMAIN-KEYWORD,youtube,DIRECT
   - DOMAIN-KEYWORD,googlevideo,DIRECT
   - DOMAIN-KEYWORD,discoveryftp,DIRECT  
-  - DOMAIN-KEYWORD,circleftp,🇧🇩BDIX1 #CIRCLE FTP SERVER
-  - IP-CIDR,15.1.1.50/24,🇧🇩BDIX1
-  - DOMAIN-KEYWORD,ftpbd,🇧🇩BDIX1
+  - DOMAIN-KEYWORD,circleftp,CIRCLEFTP #CIRCLE FTP SERVER
+  - IP-CIDR,15.1.1.50/24,CIRCLEFTP
   - DOMAIN-KEYWORD,torrentbd,DIRECT
   - DOMAIN-KEYWORD,whatsapp,DIRECT
   - IP-CIDR,103.112.62.79/32,DIRECT
