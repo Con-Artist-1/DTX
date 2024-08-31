@@ -16,32 +16,6 @@ dns:
   enhanced-mode: fake-ip 
   fake-ip-range: 198.18.0.1/16 
 
-proxy-providers:
-
-  AZADNET:
-    type: http
-    url: "https://kztanvir.github.io/bdix_0175/foreign_proxy.yaml"
-    interval: 360
-    path: ./providers/tanvir.yaml
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 500
-      timeout: 5000
-      lazy: true
-
-  TANVIR_NET:
-    type: http
-    url: "https://kztanvir.github.io/bdix_0175/bdix_servers.yaml"
-    interval: 360
-    path: ./providers/tanvir.yaml
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 500
-      timeout: 5000
-      lazy: true
-
 proxy-groups:
 
   - name: "KZT BDIX BYPASS"
@@ -130,6 +104,30 @@ proxy-groups:
     use:
       - AZADNET
 
+proxy-providers:
+  AZADNET:
+    type: http
+    url: "https://kztanvir.github.io/bdix_0175/foreign_proxy.yaml"
+    interval: 360
+    path: ./providers/tanvir.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 500
+      timeout: 5000
+      lazy: true
+
+  TANVIR_NET:
+    type: http
+    url: "https://kztanvir.github.io/bdix_0175/bdix_servers.yaml"
+    interval: 360
+    path: ./providers/tanvir.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 500
+      timeout: 5000
+      lazy: true
 #script:
 #  shortcuts:
 #    NULLDNS: resolve_ip(host) == "0.0.0.0"
