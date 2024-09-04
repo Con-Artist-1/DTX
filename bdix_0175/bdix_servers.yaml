@@ -1,11 +1,4 @@
-proxies:
-  - name: "🇧🇩BDIX20"
-    type: socks5
-    server: 182.160.121.90
-    port: 1052
-    username: R.Tanvir27/08
-    password: R.Tanvir27/08
-    
+proxies:    
   - name: "🇧🇩BDIX1 CFTP" #own BDIX server
     type: socks5
     server: 122.102.35.105 #proxy ip here
