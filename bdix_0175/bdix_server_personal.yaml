@@ -109,7 +109,7 @@ proxy-providers:
     type: http
     url: "https://kztanvir.github.io/bdix_0175/foreign_proxy.yaml"
     interval: 360
-    path: ./providers/tanvir.yaml
+    path: ./providers/tanvir_foreign.yaml
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -121,7 +121,7 @@ proxy-providers:
     type: http
     url: "https://kztanvir.github.io/bdix_0175/bdix_servers.yaml"
     interval: 360
-    path: ./providers/tanvir.yaml
+    path: ./providers/tanvir_bdix.yaml
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
