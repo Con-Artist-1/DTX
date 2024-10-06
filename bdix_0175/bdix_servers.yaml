@@ -1,14 +1,115 @@
-proxies:    
-  - name: "🇧🇩BDIX1 CFTP" #own BDIX server
-    type: socks5
-    server: 122.102.35.105 #proxy ip here
-    port: 1080 #port here
-    username: user1 #username here
-    password: user1 #password here
-  
-  - name: "🇧🇩BDIX2 CFTP" #own BDIX server
-    type: socks5
-    server: 103.111.226.248
-    port: 9090
-    username: MX
-    password: XM
+proxies:
+- name: "🇧🇩 BDIX1 FTP CIRCLE"
+  type: socks5
+  server: 122.102.35.105
+  port: 1080
+  username: user1
+  password: user1
+- name: "🇧🇩 BDIX1 FTP FTPBD SAM"
+  type: http
+  server: 203.82.195.225
+  port: 43581
+- name: "🇧🇩 BDIX2 FTP FTPBD SAM"
+  type: http
+  server: 175.29.172.54
+  port: 61739
+- name: "🇧🇩 BDIX3 FTP SAM"
+  type: http
+  server: 119.148.55.209
+  port: 33557
+- name: "🇧🇩 BDIX4 FTP SAM"
+  type: http
+  server: 119.148.14.81
+  port: 39416
+- name: "🇧🇩 BDIX5 GENERAL"
+  type: http
+  server: 118.179.121.145
+  port: 24740
+- name: "🇧🇩 BDIX6 GENERAL"
+  type: http
+  server: 202.4.101.4
+  port: 28492
+- name: "🇧🇩 BDIX7 GENERAL"
+  type: http
+  server: 202.5.46.243
+  port: 55101
+- name: "🇧🇩 BDIX8 GENERAL"
+  type: http
+  server: 202.5.51.131
+  port: 23504
+- name: "🇧🇩 BDIX9 GENERAL"
+  type: http
+  server: 115.127.36.131
+  port: 19469
+- name: "🇧🇩 BDIX10 FTP CIRCLE"
+  type: http
+  server: 103.18.204.180
+  port: 49801
+- name: "🇧🇩 BDIX11 FTP CIRCLE"
+  type: http
+  server: 103.18.205.54
+  port: 65134
+- name: "🇧🇩 BDIX12 GENERAL"
+  type: http
+  server: 123.200.23.198
+  port: 15366
+- name: "🇧🇩 BDIX13 GENERAL"
+  type: http
+  server: 27.147.217.42
+  port: 15722
+- name: "🇧🇩 BDIX14 GENERAL"
+  type: http
+  server: 144.48.117.241
+  port: 60980
+- name: "🇧🇩 BDIX15 GENERAL"
+  type: http
+  server: 103.85.158.99
+  port: 37092
+- name: "🇧🇩 BDIX16 GENERAL"
+  type: http
+  server: 203.83.171.74
+  port: 59315
+- name: "🇧🇩 BDIX17 GENERAL"
+  type: http
+  server: 203.83.164.166
+  port: 17215
+- name: "🇧🇩 BDIX18 FTP SAM ICC"
+  type: http
+  server: 203.76.110.222
+  port: 41737
+- name: "🇧🇩 BDIX19 FTP SAM ICC"
+  type: http
+  server: 202.40.184.14
+  port: 19703
+- name: "🇧🇩 BDIX20 FTP SAM"
+  type: http
+  server: 103.113.153.242
+  port: 44416
+- name: "🇧🇩 BDIX21 FTP SAM"
+  type: http
+  server: 103.40.226.142
+  port: 17546
+- name: "🇧🇩 BDIX22 FTP SAM"
+  type: http
+  server: 175.29.188.9
+  port: 13744
+- name: "🇧🇩 BDIX23 FTP SAM"
+  type: http
+  server: 175.29.177.98
+  port: 58569
+- name: "🇧🇩 BDIX24 FTP SAM ICC"
+  type: http
+  server: 202.40.187.137
+  port: 64883
+- name: "🇧🇩 BDIX25 FTP SAM ICC"
+  type: http
+  server: 103.35.110.6
+  port: 29658
+- name: "🇧🇩 BDIX26 FTP SAM"
+  type: http
+  server: 175.29.164.161
+  port: 33489
+- name: "🇧🇩 BDIX27 FTP SAM"
+  type: http
+  server: 175.29.169.73
+  port: 61403
