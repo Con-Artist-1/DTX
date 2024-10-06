@@ -37,6 +37,10 @@ proxy-groups:
       - "🇧🇩 SAM FTP"
       - "🇧🇩 ICC FTP"
       - "🇧🇩 FTPBD FTP"
+      - "🇧🇩 CIRCLE FTP LOAD"
+      - "🇧🇩 SAM FTP LOAD"
+      - "🇧🇩 ICC FTP LOAD"
+      - "🇧🇩 FTPBD FTP LOAD"
         
   - name: "🇧🇩 BDIX SERVER"
     type: select
@@ -117,6 +121,46 @@ proxy-groups:
       - TANVIR_NET
     strategy: round-robin
     lazy: true
+
+  - name: "🇧🇩 CIRCLE FTP LOAD"
+    type: load-balance
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - TANVIR_NET
+    filter: 'CIRCLE'
+    strategy: round-robin
+
+  - name: "🇧🇩 SAM FTP LOAD"
+    type: load-balance
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - TANVIR_NET
+    filter: 'SAM'
+    strategy: round-robin
+
+  - name: "🇧🇩 ICC FTP LOAD"
+    type: load-balance
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - TANVIR_NET
+    filter: 'ICC'
+    strategy: round-robin
+
+  - name: "🇧🇩 FTPBD FTP LOAD"
+    type: load-balance
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - TANVIR_NET
+    filter: 'FTPBD'
+    strategy: round-robin
 
   # Automatic selection based on best ping
   - name: "🇧🇩 BDIX AUTO (Best Ping)"
