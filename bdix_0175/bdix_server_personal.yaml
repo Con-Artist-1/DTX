@@ -24,6 +24,7 @@ proxy-groups:
       - REJECT
       - "🇧🇩 BDIX SERVER"
       - "🇧🇩 BDIX FTP BYPASS"
+      - "🇧🇩 BDIX FTP MANUAL"
       - "🇧🇩 BDIX AUTO (Best Ping)"
       - "🇧🇩 BDIX LOAD BALANCE"
       - "FOREIGN SERVER"
@@ -36,10 +37,7 @@ proxy-groups:
       - "🇧🇩 SAM FTP"
       - "🇧🇩 ICC FTP"
       - "🇧🇩 FTPBD FTP"
-    use:
-      - TANVIR_NET
-    filter: 'FTP'
-
+        
   - name: "🇧🇩 BDIX SERVER"
     type: select
     url: 'http://cp.cloudflare.com/'
@@ -47,6 +45,15 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
+
+  - name: "🇧🇩 BDIX FTP MANUAL"
+    type: url-test
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - TANVIR_NET
+    filter: 'FTP'
 
   - name: "FOREIGN SERVER"
     type: select
@@ -64,7 +71,7 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
-    filter: 'CFTP'
+    filter: 'CIRCLE'
 
   - name: "🇧🇩 SAM FTP"
     type: url-test
