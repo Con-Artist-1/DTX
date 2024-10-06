@@ -47,7 +47,7 @@ proxy-groups:
       - TANVIR_NET
 
   - name: "🇧🇩 BDIX FTP MANUAL"
-    type: url-test
+    type: select
     url: 'http://cp.cloudflare.com/'
     interval: 200
     tolerance: 50
