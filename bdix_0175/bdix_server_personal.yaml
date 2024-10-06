@@ -3,42 +3,51 @@ allow-lan: false
 mode: rule
 log-level: silent
 ipv6: true
+
 dns:
   enable: true
   listen: 0.0.0.0:53
   default-nameserver:
-    - 94.140.14.14 
-    - 94.140.15.15 
-  nameserver:
-    - 94.140.14.14 
+    - 94.140.14.14
     - 94.140.15.15
-  enhanced-mode: fake-ip 
-  fake-ip-range: 198.18.0.1/16 
+  nameserver:
+    - 94.140.14.14
+    - 94.140.15.15
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
 
 proxy-groups:
-
   - name: "KZT BDIX BYPASS"
     type: select
     proxies:
       - DIRECT
       - REJECT
-      - "🇧🇩BDIX SERVER"
+      - "🇧🇩 BDIX SERVER"
+      - "🇧🇩 BDIX FTP BYPASS"
+      - "🇧🇩 BDIX AUTO (Best Ping)"
+      - "🇧🇩 BDIX LOAD BALANCE"
       - "FOREIGN SERVER"
-      - "🇧🇩BDIX AUTO (Best Ping)"
-      - "FOREIGN AUTO (Best Ping)"
-      - "🇧🇩BDIX LOAD BALANCE"
-      - "FOREIGN LOAD BALANCE"
       - "RELAY SERVER"
-      - "RELAY SERVER (F AUTO)"
-      
-  - name: "🇧🇩BDIX SERVER"
+
+  - name: "🇧🇩 BDIX FTP BYPASS"
+    type: select
+    proxies:
+      - "🇧🇩 CIRCLE FTP"
+      - "🇧🇩 SAM FTP"
+      - "🇧🇩 ICC FTP"
+      - "🇧🇩 FTPBD FTP"
+    use:
+      - TANVIR_NET
+    filter: 'FTP'
+
+  - name: "🇧🇩 BDIX SERVER"
     type: select
     url: 'http://cp.cloudflare.com/'
     interval: 200
     tolerance: 50
     use:
       - TANVIR_NET
-  
+
   - name: "FOREIGN SERVER"
     type: select
     url: http://cp.cloudflare.com/
@@ -46,9 +55,10 @@ proxy-groups:
     tolerance: 50
     use:
       - AZADNET
-    
-  - name: "CIRCLEFTP"
-    type: select
+
+# FTP groups with their individual filtering and health-check settings
+  - name: "🇧🇩 CIRCLE FTP"
+    type: url-test
     url: 'http://cp.cloudflare.com/'
     interval: 200
     tolerance: 50
@@ -56,19 +66,42 @@ proxy-groups:
       - TANVIR_NET
     filter: 'CFTP'
 
+  - name: "🇧🇩 SAM FTP"
+    type: url-test
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - TANVIR_NET
+    filter: 'SAM'
+
+  - name: "🇧🇩 ICC FTP"
+    type: url-test
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - TANVIR_NET
+    filter: 'ICC'
+
+  - name: "🇧🇩 FTPBD FTP"
+    type: url-test
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - TANVIR_NET
+    filter: 'FTPBD'
+
+  # Relay server group
   - name: "RELAY SERVER"
     type: relay
     proxies:
-      - "🇧🇩BDIX SERVER"
+      - "🇧🇩 BDIX SERVER"
       - "FOREIGN SERVER"
 
-  - name: "RELAY SERVER (F AUTO)"
-    type: relay
-    proxies:
-      - "🇧🇩BDIX SERVER"
-      - "FOREIGN AUTO (Best Ping)"
-  
-  - name: "🇧🇩BDIX LOAD BALANCE"
+  # Load balancing groups for optimal performance
+  - name: "🇧🇩 BDIX LOAD BALANCE"
     type: load-balance
     url: 'http://cp.cloudflare.com/'
     interval: 200
@@ -78,30 +111,14 @@ proxy-groups:
     strategy: round-robin
     lazy: true
 
-  - name: "FOREIGN LOAD BALANCE"
-    type: load-balance
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - AZADNET
-    strategy: round-robin
-      
-  - name: "🇧🇩BDIX AUTO (Best Ping)"
+  # Automatic selection based on best ping
+  - name: "🇧🇩 BDIX AUTO (Best Ping)"
     type: url-test
     url: http://cp.cloudflare.com/
     interval: 300
     tolerance: 50
     use:
       - TANVIR_NET
-
-  - name: "FOREIGN AUTO (Best Ping)"
-    type: url-test
-    url: http://cp.cloudflare.com/
-    interval: 300
-    tolerance: 50
-    use:
-      - AZADNET
 
 proxy-providers:
   AZADNET:
@@ -127,13 +144,9 @@ proxy-providers:
       interval: 500
       timeout: 5000
       lazy: true
-#script:
-#  shortcuts:
-#    NULLDNS: resolve_ip(host) == "0.0.0.0"
 
 rules:
-#  - SCRIPT,NULLDNS,REJECT 
-  - IP-CIDR,0.0.0.0/32,REJECT #PATCH  SCRIPT SHORTCUT FOR BOTH  CLASH META AND  CLASH
+  - IP-CIDR,0.0.0.0/32,REJECT # Patch for both Clash Meta and Clash
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
@@ -143,6 +156,8 @@ rules:
   - IP-CIDR6,fc00::/7,DIRECT,no-resolve
   - IP-CIDR6,fe80::/10,DIRECT,no-resolve
   - IP-CIDR6,fd00::/8,DIRECT,no-resolve
+
+  # Ad and tracking domain blocks
   - DOMAIN-SUFFIX,ad.com,REJECT
   - DOMAIN,analytics.google.com,REJECT
   - DOMAIN,analyticsinsights-pa.googleapis.com,REJECT
@@ -154,12 +169,16 @@ rules:
   - DOMAIN-SUFFIX,googletagmanager.com,REJECT
   - DOMAIN-SUFFIX,googletagservices.com,REJECT
   - DOMAIN-SUFFIX,google-analytics.com,REJECT
+
+  # Direct rules for specific trackers and media
   - DOMAIN,tracker.torrent.eu.org,DIRECT
   - DOMAIN,tracker.opentrackr.org,DIRECT
   - DOMAIN,open.stealth.si,DIRECT
   - DOMAIN,exodus.desync.com,DIRECT
   - DOMAIN-SUFFIX,ggpht.com,DIRECT
   - DOMAIN,nyaa.tracker.wf,DIRECT
+
+  # Keyword-based rules
   - DOMAIN-KEYWORD,adservice,REJECT
   - DOMAIN-KEYWORD,analytics,REJECT
   - DOMAIN-KEYWORD,analysis,REJECT
@@ -170,13 +189,14 @@ rules:
   - DOMAIN-KEYWORD,torrentbd,DIRECT
   - DOMAIN-KEYWORD,youtube,DIRECT
   - DOMAIN-KEYWORD,googlevideo,DIRECT
-  - DOMAIN-KEYWORD,discoveryftp,DIRECT  
-  - DOMAIN-KEYWORD,circleftp,CIRCLEFTP #CIRCLE FTP SERVER
-  - IP-CIDR,15.1.1.50/24,CIRCLEFTP
-  - DOMAIN-KEYWORD,torrentbd,DIRECT
+  - DOMAIN-KEYWORD,discoveryftp,DIRECT
   - DOMAIN-KEYWORD,whatsapp,DIRECT
+
+  # Specific IP and CIDR rules
   - IP-CIDR,103.112.62.79/32,DIRECT
   - SRC-IP-CIDR,192.168.1.201/32,DIRECT
   - IP-CIDR,103.209.41.178/16,DIRECT
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+
+  # Fallback rule
   - MATCH,KZT BDIX BYPASS
