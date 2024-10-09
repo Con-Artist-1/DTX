@@ -113,3 +113,15 @@ proxies:
   type: http
   server: 175.29.169.73
   port: 61403
+- name: "🇧🇩 BDIX28 FTP CIRCLE"
+  type: http
+  server: 103.18.204.141
+  port: 35041
+- name: "🇧🇩 BDIX29 FTP CIRCLE"
+  type: http
+  server: 103.243.238.36
+  port: 15209
+- name: "🇧🇩 BDIX30 FTP CIRCLE"
+  type: http
+  server: 103.243.238.166
+  port: 36676
