@@ -49,7 +49,6 @@ function FindProxyForURL(url, host) {
     if (
         shExpMatch(host, "*facebook*") ||
         shExpMatch(host, "*fbcdn*") ||
-        shExpMatch(host, "**") ||
         shExpMatch(url, "*google*") ||
         shExpMatch(url, "*youtube*") ||
         shExpMatch(url, "*googlevideo*") ||
