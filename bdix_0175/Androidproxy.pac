@@ -53,6 +53,7 @@ function FindProxyForURL(url, host) {
         shExpMatch(url, "*youtube*") ||
         shExpMatch(url, "*googlevideo*") ||
         shExpMatch(host, "*cudy.net") ||
+        shExpMatch(host, "*torrentbd*") ||
         shExpMatch(url, "*whatsapp*")
     ) {
         return "DIRECT";
