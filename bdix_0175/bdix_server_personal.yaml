@@ -238,6 +238,7 @@ rules:
   - DOMAIN-KEYWORD,fbcdn,DIRECT
   - DOMAIN-KEYWORD,messenger,DIRECT
   - DOMAIN-KEYWORD,torrentbd,DIRECT
+  - DOMAIN-KEYWORD,circleftp,DIRECT
   - DOMAIN-KEYWORD,youtube,DIRECT
   - DOMAIN-KEYWORD,googlevideo,DIRECT
   - DOMAIN-KEYWORD,discoveryftp,DIRECT
