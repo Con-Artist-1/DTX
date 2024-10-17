@@ -36,11 +36,9 @@ proxy-groups:
       - "🇧🇩 CIRCLE FTP"
       - "🇧🇩 SAM FTP"
       - "🇧🇩 ICC FTP"
-      - "🇧🇩 FTPBD FTP"
       - "🇧🇩 CIRCLE FTP LOAD"
       - "🇧🇩 SAM FTP LOAD"
       - "🇧🇩 ICC FTP LOAD"
-      - "🇧🇩 FTPBD FTP LOAD"
         
   - name: "🇧🇩 BDIX SERVER"
     type: select
@@ -95,15 +93,6 @@ proxy-groups:
       - TANVIR_NET
     filter: 'ICC'
 
-  - name: "🇧🇩 FTPBD FTP"
-    type: url-test
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    filter: 'FTPBD'
-
   # Relay server group
   - name: "RELAY SERVER"
     type: relay
@@ -150,16 +139,6 @@ proxy-groups:
     use:
       - TANVIR_NET
     filter: 'ICC'
-    strategy: round-robin
-
-  - name: "🇧🇩 FTPBD FTP LOAD"
-    type: load-balance
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    filter: 'FTPBD'
     strategy: round-robin
 
   # Automatic selection based on best ping
