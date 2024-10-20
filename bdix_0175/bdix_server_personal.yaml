@@ -217,7 +217,7 @@ rules:
   - DOMAIN-KEYWORD,fbcdn,DIRECT
   - DOMAIN-KEYWORD,messenger,DIRECT
   - DOMAIN-KEYWORD,torrentbd,DIRECT
-  - DOMAIN-KEYWORD,circleftp,🇧🇩 CIRCLE FTP
+  #- DOMAIN-KEYWORD,circleftp,🇧🇩 CIRCLE FTP
   - DOMAIN-KEYWORD,youtube,DIRECT
   - DOMAIN-KEYWORD,googlevideo,DIRECT
   - DOMAIN-KEYWORD,discoveryftp,DIRECT
