@@ -55,7 +55,7 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
-    filter: 'FTP'
+    filter: '.*FTP.*'
 
   - name: "FOREIGN SERVER"
     type: select
@@ -73,7 +73,7 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
-    filter: 'CIRCLE'
+    filter: '.*CIRCLE.*'
 
   - name: "🇧🇩 SAM FTP"
     type: url-test
@@ -82,7 +82,7 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
-    filter: 'SAM'
+    filter: '.*SAM.*'
 
   - name: "🇧🇩 ICC FTP"
     type: url-test
@@ -91,7 +91,7 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
-    filter: 'ICC'
+    filter: '.*ICC.*'
 
   # Relay server group
   - name: "RELAY SERVER"
@@ -118,7 +118,7 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
-    filter: 'CIRCLE'
+    filter: '.*CIRCLE.*'
     strategy: round-robin
 
   - name: "🇧🇩 SAM FTP LOAD"
@@ -128,7 +128,7 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
-    filter: 'SAM'
+    filter: '.*SAM.*'
     strategy: round-robin
 
   - name: "🇧🇩 ICC FTP LOAD"
@@ -138,7 +138,7 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
-    filter: 'ICC'
+    filter: '.*ICC.*'
     strategy: round-robin
 
   # Automatic selection based on best ping
