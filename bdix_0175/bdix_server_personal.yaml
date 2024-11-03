@@ -26,6 +26,7 @@ proxy-groups:
       - "🇧🇩 BDIX FTP BYPASS"
       - "🇧🇩 BDIX FTP MANUAL"
       - "🇧🇩 BDIX AUTO (Best Ping)"
+      - "🇧🇩 BDIX ULTRA (Best Ping)"
       - "🇧🇩 BDIX LOAD BALANCE"
       - "FOREIGN SERVER"
       - "RELAY SERVER"
@@ -47,6 +48,7 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
+      - ULTRA_NET
 
   - name: "🇧🇩 BDIX FTP MANUAL"
     type: select
@@ -150,6 +152,16 @@ proxy-groups:
     use:
       - TANVIR_NET
 
+  # Automatic selection based on best ping
+  - name: "🇧🇩 BDIX ULTRA (Best Ping)"
+    type: url-test
+    url: http://cp.cloudflare.com/
+    interval: 300
+    tolerance: 50
+    use:
+      - ULTRA_NET
+    
+
 proxy-providers:
   AZADNET:
     type: http
@@ -175,6 +187,17 @@ proxy-providers:
       timeout: 5000
       lazy: true
 
+  ULTRA_BDIX:
+    type: http
+    url: "https://kztanvir.github.io/bdix_0175/bdix_ultra.yaml"
+    interval: 360
+    path: ./providers/tanvir_bdix.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 500
+      timeout: 5000
+      lazy: true
 rules:
   - IP-CIDR,0.0.0.0/32,REJECT # Patch for both Clash Meta and Clash
   - DOMAIN-SUFFIX,10.0.0.0/8,KZT BDIX BYPASS
