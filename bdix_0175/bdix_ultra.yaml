@@ -1,262 +1,709 @@
-port: 4540
-allow-lan: false
-mode: rule
-log-level: silent
-ipv6: true
-
-dns:
-  enable: true
-  listen: 0.0.0.0:53
-  default-nameserver:
-    - 94.140.14.14
-    - 94.140.15.15
-  nameserver:
-    - 94.140.14.14
-    - 94.140.15.15
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-
-proxy-groups:
-  - name: "KZT BDIX BYPASS"
-    type: select
-    proxies:
-      - DIRECT
-      - REJECT
-      - "🇧🇩 BDIX SERVER"
-      - "🇧🇩 BDIX ULTRA SERVER"
-      - "🇧🇩 BDIX FTP BYPASS"
-      - "🇧🇩 BDIX FTP MANUAL"
-      - "🇧🇩 BDIX AUTO (Best Ping)"
-      - "🇧🇩 BDIX ULTRA (Best Ping)"
-      - "🇧🇩 BDIX LOAD BALANCE"
-      - "FOREIGN SERVER"
-      - "RELAY SERVER"
-
-  - name: "🇧🇩 BDIX FTP BYPASS"
-    type: select
-    proxies:
-      - "🇧🇩 CIRCLE FTP"
-      - "🇧🇩 SAM FTP"
-      - "🇧🇩 ICC FTP"
-      - "🇧🇩 CIRCLE FTP LOAD"
-      - "🇧🇩 SAM FTP LOAD"
-      - "🇧🇩 ICC FTP LOAD"
-        
-  - name: "🇧🇩 BDIX SERVER"
-    type: select
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-
-  - name: "🇧🇩 BDIX ULTRA SERVER"
-    type: select
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - ULTRA_BDIX
-
-  - name: "🇧🇩 BDIX FTP MANUAL"
-    type: select
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    filter: '.*FTP.*'
-
-  - name: "FOREIGN SERVER"
-    type: select
-    url: http://cp.cloudflare.com/
-    interval: 300
-    tolerance: 50
-    use:
-      - AZADNET
-
-# FTP groups with their individual filtering and health-check settings
-  - name: "🇧🇩 CIRCLE FTP"
-    type: url-test
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    filter: '.*CIRCLE.*'
-
-  - name: "🇧🇩 SAM FTP"
-    type: url-test
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    filter: '.*SAM.*'
-
-  - name: "🇧🇩 ICC FTP"
-    type: url-test
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    filter: '.*ICC.*'
-
-  # Relay server group
-  - name: "RELAY SERVER"
-    type: relay
-    proxies:
-      - "🇧🇩 BDIX SERVER"
-      - "FOREIGN SERVER"
-
-  # Load balancing groups for optimal performance
-  - name: "🇧🇩 BDIX LOAD BALANCE"
-    type: load-balance
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    strategy: round-robin
-    lazy: true
-
-  - name: "🇧🇩 CIRCLE FTP LOAD"
-    type: load-balance
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    filter: '.*CIRCLE.*'
-    strategy: round-robin
-
-  - name: "🇧🇩 SAM FTP LOAD"
-    type: load-balance
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    filter: '.*SAM.*'
-    strategy: round-robin
-
-  - name: "🇧🇩 ICC FTP LOAD"
-    type: load-balance
-    url: 'http://cp.cloudflare.com/'
-    interval: 200
-    tolerance: 50
-    use:
-      - TANVIR_NET
-    filter: '.*ICC.*'
-    strategy: round-robin
-
-  # Automatic selection based on best ping
-  - name: "🇧🇩 BDIX AUTO (Best Ping)"
-    type: url-test
-    url: http://cp.cloudflare.com/
-    interval: 300
-    tolerance: 50
-    use:
-      - TANVIR_NET
-
-  # Automatic selection based on best ping
-  - name: "🇧🇩 BDIX ULTRA (Best Ping)"
-    type: url-test
-    url: http://cp.cloudflare.com/
-    interval: 300
-    tolerance: 50
-    use:
-      - ULTRA_BDIX
-    
-
-proxy-providers:
-  AZADNET:
-    type: http
-    url: "https://kztanvir.github.io/bdix_0175/foreign_proxy.yaml"
-    interval: 360
-    path: ./providers/tanvir_foreign.yaml
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 500
-      timeout: 5000
-      lazy: true
-
-  TANVIR_NET:
-    type: http
-    url: "https://kztanvir.github.io/bdix_0175/bdix_servers.yaml"
-    interval: 360
-    path: ./providers/tanvir_bdix.yaml
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 500
-      timeout: 5000
-      lazy: true
-
-  ULTRA_BDIX:
-    type: http
-    url: "https://kztanvir.github.io/bdix_0175/bdix_ultra.yaml"
-    interval: 360
-    path: ./providers/tanvir_bdix.yaml
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 500
-      timeout: 5000
-      lazy: true
-rules:
-  - IP-CIDR,0.0.0.0/32,REJECT # Patch for both Clash Meta and Clash
-  - DOMAIN-SUFFIX,10.0.0.0/8,KZT BDIX BYPASS
-  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
-  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
-  - IP-CIDR6,::1/128,DIRECT,no-resolve
-  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
-  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
-  - IP-CIDR6,fd00::/8,DIRECT,no-resolve
-
-  # Ad and tracking domain blocks
-  - DOMAIN-SUFFIX,ad.com,REJECT
-  - DOMAIN,analytics.google.com,REJECT
-  - DOMAIN,analyticsinsights-pa.googleapis.com,REJECT
-  - DOMAIN,analyticsreporting.googleapis.com,REJECT
-  - DOMAIN-SUFFIX,doubleclick.net,REJECT
-  - DOMAIN-SUFFIX,googleadservices.com,REJECT
-  - DOMAIN-SUFFIX,googleadsserving.cn,REJECT
-  - DOMAIN-SUFFIX,googlesyndication.com,REJECT
-  - DOMAIN-SUFFIX,googletagmanager.com,REJECT
-  - DOMAIN-SUFFIX,googletagservices.com,REJECT
-  - DOMAIN-SUFFIX,google-analytics.com,REJECT
-
-  # Direct rules for specific trackers and media
-  - DOMAIN,tracker.torrent.eu.org,DIRECT
-  - DOMAIN,tracker.opentrackr.org,DIRECT
-  - DOMAIN,open.stealth.si,DIRECT
-  - DOMAIN,exodus.desync.com,DIRECT
-  - DOMAIN-SUFFIX,ggpht.com,DIRECT
-  - DOMAIN,nyaa.tracker.wf,DIRECT
-
-  # Keyword-based rules
-  - DOMAIN-KEYWORD,adservice,REJECT
-  - DOMAIN-KEYWORD,analytics,REJECT
-  - DOMAIN-KEYWORD,analysis,REJECT
-  - DOMAIN-KEYWORD,googleads,REJECT
-  - DOMAIN-KEYWORD,facebook,DIRECT
-  - DOMAIN-KEYWORD,fbcdn,DIRECT
-  - DOMAIN-KEYWORD,messenger,DIRECT
-  - DOMAIN-KEYWORD,torrentbd,DIRECT
-  #- DOMAIN-KEYWORD,circleftp,🇧🇩 CIRCLE FTP
-  - DOMAIN-KEYWORD,youtube,DIRECT
-  - DOMAIN-KEYWORD,googlevideo,DIRECT
-  - DOMAIN-KEYWORD,discoveryftp,DIRECT
-  - DOMAIN-KEYWORD,whatsapp,DIRECT
-
-  # Specific IP and CIDR rules
-  - IP-CIDR,103.112.62.79/32,DIRECT
-  - SRC-IP-CIDR,192.168.1.201/32,DIRECT
-  - IP-CIDR,103.209.41.178/16,DIRECT
-  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-
-  # Fallback rule
-  - MATCH,KZT BDIX BYPASS
+proxies:
+  - name: Kamruzzaman Tanv (100.0)
+    password: duper
+    port: 9169
+    server: 114.130.82.32
+    type: socks5
+    username: super
+  - name: Adnan Samir (100.0)
+    password: speed
+    port: 9169
+    server: 103.9.135.2
+    type: socks5
+    username: Speedbuy.xyz
+  - name: Muhammad Mashroof (100.0)
+    password: '1234'
+    port: 9169
+    server: 103.111.227.217
+    type: socks5
+    username: Mashroof
+  - name: Tanvir ahmed sisir (50.0)
+    password: tanvir2025
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: Tanvirahmed
+  - name: Mehedi Hasan (100.0)
+    password: '1122'
+    port: 9169
+    server: 103.96.104.110
+    type: socks5
+    username: Mamun
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.206.228.57
+    type: socks5
+    username: flexbitbd53
+  - name: Jhon Dentist (30.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.165.93.83
+    type: socks5
+    username: flexbitbd51
+  - name: Jhon Dentist (30.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd82
+  - name: Jhon Dentist (20.0)
+    password: flexbitbd
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: flexbitbd72
+  - name: Jhon Dentist (50.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd85
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.111.227.217
+    type: socks5
+    username: flexbitbd57
+  - name: Jhon Dentist (50.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.206.228.57
+    type: socks5
+    username: flexbitbd78
+  - name: Jhon Dentist (100.0)
+    password: rasel
+    port: 1080
+    server: 103.96.104.110
+    type: socks5
+    username: flexbitbd52
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 9200
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd69
+  - name: Jhon Dentist (20.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd62
+  - name: Jhon Dentist (20.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.197.251.210
+    type: socks5
+    username: flexbitbd60
+  - name: Jhon Dentist (20.0)
+    password: flexbitbd
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: flexbitbd80
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd76
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 1080
+    server: 203.190.8.145
+    type: socks5
+    username: flexbitbd58
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.96.104.110
+    type: socks5
+    username: flexbitbd63
+  - name: Jhon Dentist (50.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: flexbitbd70
+  - name: Jhon Dentist (50.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.206.228.57
+    type: socks5
+    username: flexbitbd55
+  - name: Jhon Dentist (30.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.96.104.110
+    type: socks5
+    username: flexbitbd59
+  - name: Jhon Dentist (100.0)
+    password: salim
+    port: 1080
+    server: 103.206.228.57
+    type: socks5
+    username: flexbitbd54
+  - name: Jhon Dentist (50.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.61.240.99
+    type: socks5
+    username: flexbitbd86
+  - name: Jhon Dentist (30.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.197.251.210
+    type: socks5
+    username: flexbitbd50
+  - name: Jhon Dentist (50.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.206.228.57
+    type: socks5
+    username: flexbitbd77
+  - name: Jhon Dentist (20.0)
+    password: flexbitbd
+    port: 9169
+    server: 203.190.8.145
+    type: socks5
+    username: flexbitbd83
+  - name: Jhon Dentist (20.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.96.104.110
+    type: socks5
+    username: flexbitbd68
+  - name: Jhon Dentist (20.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd56
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd66
+  - name: Jhon Dentist (30.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd87
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: flexbitbd73
+  - name: Jhon Dentist (20.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd84
+  - name: Jhon Dentist (30.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: flexbitbd81
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 9169
+    server: 203.190.8.145
+    type: socks5
+    username: flexbitbd79
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.165.93.83
+    type: socks5
+    username: flexbitbd75
+  - name: Jhon Dentist (30.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.111.227.217
+    type: socks5
+    username: flexbitbd67
+  - name: Jhon Dentist (20.0)
+    password: flexbitbd
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: flexbitbd74
+  - name: Jhon Dentist (50.0)
+    password: flexbitbd
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: flexbitbd61
+  - name: Jhon Dentist (30.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.158.132.154
+    type: socks5
+    username: flexbitbd71
+  - name: Jhon Dentist (100.0)
+    password: flexbitbd
+    port: 1080
+    server: 103.125.28.169
+    type: socks5
+    username: flexbitbd65
+  - name: HM PARVEZ AHAMED (100.0)
+    password: hmparvez68
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: hmparvez
+  - name: Joy Lion (60.0)
+    password: joylion3
+    port: 9169
+    server: 103.188.136.77
+    type: socks5
+    username: joylion
+  - name: Muzahid (50.0)
+    password: '609029'
+    port: 1080
+    server: 103.197.251.210
+    type: socks5
+    username: Muzahid1
+  - name: Aakib (100.0)
+    password: '47472535'
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: homjao@cloudts.shop
+  - name: MD JISAN (50.0)
+    password: '123'
+    port: 1080
+    server: 180.92.232.177
+    type: socks5
+    username: jisan
+  - name: mdkaesbd (50.0)
+    password: '4580'
+    port: 9169
+    server: 103.205.132.50
+    type: socks5
+    username: 50mbps
+  - name: mdazad mahmud (100.0)
+    password: azad@
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: Azad
+  - name: dipto93477 (50.0)
+    password: moniruzzaman12
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: moniruzzaman1
+  - name: HASNAIN (20.0)
+    password: '#hasnain321#'
+    port: 1080
+    server: 103.158.132.154
+    type: socks5
+    username: mdhasnain8980@gmail.com
+  - name: 64 BIT (20.0)
+    password: mashfiqur123
+    port: 9169
+    server: 103.111.225.232
+    type: socks5
+    username: mashfiqur
+  - name: Sazzad Naim (100.0)
+    password: proxypass
+    port: 1080
+    server: 203.190.8.145
+    type: socks5
+    username: snzero
+  - name: Shafin10 (100.0)
+    password: vtkn10
+    port: 9169
+    server: 103.124.180.14
+    type: socks5
+    username: VTKN10
+  - name: Atikur Rahman Shohel (50.0)
+    password: 12345jerin
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: jerin
+  - name: Bangla Video (30.0)
+    password: aziz1
+    port: 9169
+    server: 103.206.228.57
+    type: socks5
+    username: aziz
+  - name: xiao100047 (30.0)
+    password: nihal1234
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: xiao100047
+  - name: jamil (100.0)
+    password: jamil1
+    port: 9169
+    server: 103.134.60.86
+    type: socks5
+    username: jamil
+  - name: chelebesto (50.0)
+    password: xdvirus1
+    port: 9169
+    server: 103.96.104.110
+    type: socks5
+    username: xdvirus
+  - name: ms rasel (50.0)
+    password: a1a1a1A .
+    port: 9169
+    server: 103.165.93.83
+    type: socks5
+    username: papon
+  - name: Sulayman (50.0)
+    password: megabot@1
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: sulybaka
+  - name: Fahim099 (100.0)
+    password: '@fahim4969'
+    port: 9169
+    server: 103.124.180.14
+    type: socks5
+    username: fahim
+  - name: rakibzzz (100.0)
+    password: 1234566qqq
+    port: 1080
+    server: 103.197.251.210
+    type: socks5
+    username: rakibzzz@1
+  - name: ronykumarpaul (50.0)
+    password: rony468
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: rony82
+  - name: Mahdi Hassan (100.0)
+    password: Mahdi__70
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: Mahdi
+  - name: ahsb8900@gmail.com (100.0)
+    password: HSB800@
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: hsb800
+  - name: Knight of The Night (50.0)
+    password: rupom02
+    port: 9169
+    server: 103.96.104.110
+    type: socks5
+    username: rupom2
+  - name: parveztohin328 (100.0)
+    password: '2'
+    port: 9169
+    server: 103.111.225.232
+    type: socks5
+    username: '1'
+  - name: Sk sabbir (100.0)
+    password: Sk1@21Sk
+    port: 9169
+    server: 103.96.104.110
+    type: socks5
+    username: rjrafi430@gmail.com
+  - name: Md. Mahesinul Awal Mannan Joy (50.0)
+    password: '244090'
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: joybdix
+  - name: Md Shorif Islam (40.0)
+    password: Shorif##@1
+    port: 9169
+    server: 103.165.93.83
+    type: socks5
+    username: shorifislam3271
+  - name: Sajid Islam (50.0)
+    password: sajid123
+    port: 9169
+    server: 103.141.201.181
+    type: socks5
+    username: sajid50
+  - name: Rashed Osman (100.0)
+    password: rashed1234
+    port: 1080
+    server: 103.134.62.89
+    type: socks5
+    username: rashed
+  - name: nawshad babu (50.0)
+    password: Babu@123
+    port: 1080
+    server: 203.190.8.145
+    type: socks5
+    username: Babu
+  - name: rvttxvendettacs (100.0)
+    password: alif@123
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: alif
+  - name: Hae241 (20.0)
+    password: 123Tkp456@
+    port: 9169
+    server: 103.61.240.99
+    type: socks5
+    username: Hae241
+  - name: akanda (20.0)
+    password: akanda365
+    port: 9169
+    server: 103.141.201.181
+    type: socks5
+    username: akanda
+  - name: sagorshamiul2 (100.0)
+    password: sagorshamiul28272
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: sagorshamiul
+  - name: NarutoKun (50.0)
+    password: '007'
+    port: 9169
+    server: 103.188.136.77
+    type: socks5
+    username: NarutoKun007
+  - name: Joy Mondol (50.0)
+    password: '1234'
+    port: 9169
+    server: 103.141.201.181
+    type: socks5
+    username: '0000'
+  - name: Iftikhar Ahmed (20.0)
+    password: ninjaifti3061
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: ninjaifti
+  - name: Tushar Shuvro (100.0)
+    password: p1n1xcr3w
+    port: 9169
+    server: 103.111.225.232
+    type: socks5
+    username: rednsf
+  - name: Bangladesh Punda cele (60.0)
+    password: samim2005
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: Samim2167
+  - name: itonews (50.0)
+    password: 123456new
+    port: 9169
+    server: 103.124.180.14
+    type: socks5
+    username: itonewsbd@gmail.com
+  - name: Emon ahamed (20.0)
+    password: '1345131514'
+    port: 9169
+    server: 103.111.225.232
+    type: socks5
+    username: Emonahamed
+  - name: MD Jubayer Islam (50.0)
+    password: '9898'
+    port: 9169
+    server: 103.96.104.110
+    type: socks5
+    username: jubayer99
+  - name: Dark Xx2.O (20.0)
+    password: Tasin2x
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: tasin2x
+  - name: Dark Xx2.O (20.0)
+    password: '@Oishik69'
+    port: 9169
+    server: 103.124.180.14
+    type: socks5
+    username: Oishik69
+  - name: Dark Xx2.O (50.0)
+    password: Oishik007@
+    port: 9169
+    server: 103.124.180.14
+    type: socks5
+    username: Oishik_Protim_Adhikary
+  - name: likhonmain (50.0)
+    password: sala
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: ruet
+  - name: Joshim Uddin (100.0)
+    password: '82122500'
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: Joshim
+  - name: Studio Knoxhunt (100.0)
+    password: knox@#
+    port: 1080
+    server: 103.124.180.14
+    type: socks5
+    username: knox
+  - name: Tarif (30.0)
+    password: tarif1122
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: tarift81@gmail.com
+  - name: Uzayer (20.0)
+    password: uzayer
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: Uzayer
+  - name: mdujjal (100.0)
+    password: uzzal2
+    port: 9169
+    server: 103.134.62.89
+    type: socks5
+    username: uzzal1
+  - name: nish4d (50.0)
+    password: nishad123
+    port: 9169
+    server: 103.141.201.181
+    type: socks5
+    username: nishad
+  - name: speedyGonz (30.0)
+    password: speedy1001
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: speedyGonz
+  - name: hamty (40.0)
+    password: hameem7391
+    port: 9169
+    server: 103.96.104.110
+    type: socks5
+    username: hamty007
+  - name: Imran Nazir (50.0)
+    password: imranbl12
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: imranbl
+  - name: sranton1707 (30.0)
+    password: mnbvcxz2
+    port: 9169
+    server: 103.158.132.154
+    type: socks5
+    username: antor4591@gmail.com
+  - name: William Shimus (20.0)
+    password: bbb
+    port: 9169
+    server: 103.124.180.14
+    type: socks5
+    username: aaa
+  - name: sumanengbd (40.0)
+    password: 01727282829S
+    port: 9169
+    server: 103.111.225.232
+    type: socks5
+    username: sumanengbd@gmail.com
+  - name: Marjan4903 (100.0)
+    password: WELLS2003
+    port: 9169
+    server: 114.130.82.32
+    type: socks5
+    username: Marjan4903
+  - name: mrrony (30.0)
+    password: '776699'
+    port: 1080
+    server: 103.134.60.86
+    type: socks5
+    username: mrrony1
+  - name: tanvirahmedmn (50.0)
+    password: t4n7iR
+    port: 1080
+    server: 203.190.8.145
+    type: socks5
+    username: tanvirahmedmn
+  - name: IC (100.0)
+    password: 123@@
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: Faizullah
+  - name: Abu Jobayer (100.0)
+    password: pepsodent
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: abu
+  - name: Hummayon Ahmmed (50.0)
+    password: 01731810924?
+    port: 9169
+    server: 180.92.232.177
+    type: socks5
+    username: hummayonahmmed253@gmail.com
+  - name: Shohag (30.0)
+    password: Shohagbae
+    port: 9169
+    server: 103.124.180.14
+    type: socks5
+    username: Shohag
+  - name: Speed (100.0)
+    password: adsfasdf
+    port: 9169
+    server: 103.61.240.99
+    type: socks5
+    username: adnansamir@gmail.co
+  - name: Sheikhnaim Islam1258 (60.0)
+    password: '337186'
+    port: 9169
+    server: 103.111.225.232
+    type: socks5
+    username: naim
+  - name: Jahid (50.0)
+    password: '123456'
+    port: 9169
+    server: 103.111.227.217
+    type: socks5
+    username: jahid
+  - name: Itzsarwar.06  (100.0)
+    password: '12580'
+    port: 9169
+    server: 103.134.62.89
+    type: socks5
+    username: islam
+  - name: Sayed Hasan (100.0)
+    password: Cojze3-zanper-xehmin
+    port: 9169
+    server: 103.96.104.110
+    type: socks5
+    username: anik030.sa@gmail.com
+  - name: K.M. Al Jaziz Turja (100.0)
+    password: fuck69
+    port: 9169
+    server: 103.125.28.169
+    type: socks5
+    username: diablo
+  - name: Shahariar143 (40.0)
+    password: Shahariar143
+    port: 9169
+    server: 103.197.251.210
+    type: socks5
+    username: Shahariar1
+  - name: raiyan (60.0)
+    password: raiyan12
+    port: 9169
+    server: 103.158.132.154
+    type: socks5
+    username: raiyan11
+  - name: Nirob Ahmed (20.0)
+    password: gabriel1
+    port: 1080
+    server: 180.92.232.177
+    type: socks5
+    username: gabriel
