@@ -23,6 +23,7 @@ proxy-groups:
       - DIRECT
       - REJECT
       - "🇧🇩 BDIX SERVER"
+      - "🇧🇩 BDIX ULTRA SERVER"
       - "🇧🇩 BDIX FTP BYPASS"
       - "🇧🇩 BDIX FTP MANUAL"
       - "🇧🇩 BDIX AUTO (Best Ping)"
@@ -48,7 +49,14 @@ proxy-groups:
     tolerance: 50
     use:
       - TANVIR_NET
-      - ULTRA_NET
+
+  - name: "🇧🇩 BDIX ULTRA SERVER"
+    type: select
+    url: 'http://cp.cloudflare.com/'
+    interval: 200
+    tolerance: 50
+    use:
+      - ULTRA_BDIX
 
   - name: "🇧🇩 BDIX FTP MANUAL"
     type: select
@@ -159,7 +167,7 @@ proxy-groups:
     interval: 300
     tolerance: 50
     use:
-      - ULTRA_NET
+      - ULTRA_BDIX
     
 
 proxy-providers:
