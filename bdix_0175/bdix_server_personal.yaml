@@ -27,8 +27,6 @@ proxy-groups:
       - "🇧🇩 BDIX FTP MANUAL"
       - "🇧🇩 BDIX AUTO (Best Ping)"
       - "🇧🇩 BDIX LOAD BALANCE"
-      - "FOREIGN SERVER"
-      - "RELAY SERVER"
 
   - name: "🇧🇩 BDIX FTP BYPASS"
     type: select
@@ -57,14 +55,6 @@ proxy-groups:
       - TANVIR_NET
     filter: '.*FTP.*'
 
-  - name: "FOREIGN SERVER"
-    type: select
-    url: http://cp.cloudflare.com/
-    interval: 300
-    tolerance: 50
-    use:
-      - AZADNET
-
 # FTP groups with their individual filtering and health-check settings
   - name: "🇧🇩 CIRCLE FTP"
     type: url-test
@@ -92,13 +82,6 @@ proxy-groups:
     use:
       - TANVIR_NET
     filter: '.*ICC.*'
-
-  # Relay server group
-  - name: "RELAY SERVER"
-    type: relay
-    proxies:
-      - "🇧🇩 BDIX SERVER"
-      - "FOREIGN SERVER"
 
   # Load balancing groups for optimal performance
   - name: "🇧🇩 BDIX LOAD BALANCE"
@@ -153,29 +136,10 @@ proxy-groups:
     
 
 proxy-providers:
-  AZADNET:
-    type: http
-    url: "https://kztanvir.github.io/bdix_0175/foreign_proxy.yaml"
-    interval: 360
-    path: ./providers/tanvir_foreign.yaml
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 500
-      timeout: 5000
-      lazy: true
-
   TANVIR_NET:
     type: http
     url: "https://kztanvir.github.io/bdix_0175/bdix_servers.yaml"
-    interval: 360
     path: ./providers/tanvir_bdix.yaml
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 500
-      timeout: 5000
-      lazy: true
 
 rules:
   - IP-CIDR,0.0.0.0/32,REJECT # Patch for both Clash Meta and Clash
