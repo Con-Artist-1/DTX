@@ -4,7 +4,7 @@ proxies:
   server: 160.250.192.19
   port: 38895
   cipher: chacha20-ietf-poly1305
-  password: mCFGbJ1Ia4jjAVGg03sK61
+  password: eddR1659G6nYlZeht9wSf0My
 
 - name: BDIX1 SAM FTP 50 mbps
   type: http
