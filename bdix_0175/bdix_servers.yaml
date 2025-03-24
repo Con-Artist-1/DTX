@@ -3,10 +3,6 @@ proxies:
   type: http
   server: 175.29.178.42
   port: 49516
-- name: BDIX10 CIRCLE FTP 50 mbps
-  type: http
-  server: 202.136.89.28
-  port: 43770
 - name: BDIX12 GENERAL 50 mbps
   type: http
   server: 117.58.241.133
@@ -35,10 +31,6 @@ proxies:
   type: http
   server: 49.0.45.62
   port: 4234
-- name: BDIX31 GENERAL 100 mbps
-  type: http
-  server: 45.115.114.146
-  port: 7653
 - name: BDIX32 GENERAL 100 mbps
   type: http
   server: 103.10.52.134
@@ -67,10 +59,6 @@ proxies:
   type: http
   server: 45.115.112.138
   port: 7675
-- name: BDIX40 GENERAL 100 mbps
-  type: http
-  server: 121.200.63.222
-  port: 7543
 - name: BDIX41 GENERAL 100 mbps
   type: http
   server: 121.200.63.235
@@ -83,26 +71,14 @@ proxies:
   type: http
   server: 103.245.109.69
   port: 8967
-- name: BDIX46 ALL FTP 100 mbps
-  type: http
-  server: 103.161.69.28
-  port: 2698
 - name: BDIX48 ALL FTP 100 mbps
   type: http
   server: 103.113.149.235
   port: 2658
-- name: BDIX49 ALL FTP 100 mbps
-  type: http
-  server: 103.161.68.127
-  port: 2468
 - name: BDIX51 ALL FTP 100 mbps
   type: http
   server: 103.161.69.217
   port: 8469
-- name: BDIX52 ALL FTP 100 mbps
-  type: http
-  server: 103.163.171.202
-  port: 5126
 - name: BDIX53 ALL FTP 100 mbps
   type: http
   server: 103.163.171.25
@@ -111,18 +87,6 @@ proxies:
   type: http
   server: 103.161.68.176
   port: 4952
-- name: BDIX55 ALL FTP 100 mbps
-  type: http
-  server: 103.163.171.204
-  port: 4695
-- name: BDIX57 ALL FTP 100 mbps
-  type: http
-  server: 103.163.171.201
-  port: 3265
-- name: BDIX58 ALL FTP 100 mbps
-  type: http
-  server: 103.163.171.203
-  port: 6598
 - name: BDIX59 ALL FTP 100 mbps
   type: http
   server: 116.204.151.205
@@ -131,10 +95,6 @@ proxies:
   type: http
   server: 103.10.52.254
   port: 6765
-- name: BDIX63 GENERAL 100 mbps
-  type: http
-  server: 103.245.109.51
-  port: 8542
 - name: BDIX65 GENERAL 100 mbps
   type: http
   server: 103.245.109.92
@@ -167,31 +127,6 @@ proxies:
   type: http
   server: 103.239.252.42
   port: 42398
-- name: BDIX76 GENERAL 100 mbps
-  type: http
-  server: 103.120.202.160
-  port: 56640
-
-- name: BDIX58b GENERAL 50 mbps
-  type: socks5
-  server: 103.129.213.97
-  port: 9169
-  username: speedb
-  password: speedb
-
-- name: BDIX62 GENERAL 100 mbps
-  type: socks5
-  server: 114.130.82.32
-  port: 9169
-  username: speedb
-  password: speedb
-
-- name: BDIX63 GENERAL 100 mbps
-  type: socks5
-  server: 103.87.138.44
-  port: 9169
-  username: speedb
-  password: speedb
 
 - name: BDIX68 GENERAL 100 mbps
   type: socks5
@@ -199,32 +134,3 @@ proxies:
   port: 9169
   username: speedb
   password: speedb
-
-- name: BDIX70 GENERAL 50 mbps
-  type: socks5
-  server: 103.134.60.86
-  port: 9169
-  username: speedb
-  password: speedb
-
-- name: BDIX74 CIRCLE 100 mbps
-  type: socks5
-  server: 103.142.185.16
-  port: 9169
-  username: speedb
-  password: speedb
-
-- name: BDIX76 GENERAL 100 mbps
-  type: socks5
-  server: 203.188.254.109
-  port: 9169
-  username: speedb
-  password: speedb
-
-- name: BDIX78 GENERAL 100 mbps
-  type: socks5
-  server: 103.124.180.14
-  port: 9169
-  username: speedb
-  password: speedb
-
